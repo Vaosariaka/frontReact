@@ -1,0 +1,158 @@
+{
+  "table_name": "ps_order_invoice",
+  "columns": [
+    {
+      "field": "id_order_invoice",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_order",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "number",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "delivery_number",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "delivery_date",
+      "type": "datetime",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "total_discount_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_discount_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_paid_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_paid_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_products",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_products_wt",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_shipping_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_shipping_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "shipping_tax_computation_method",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "total_wrapping_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_wrapping_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "shop_address",
+      "type": "mediumtext",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "note",
+      "type": "mediumtext",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_invoice` ("
+}

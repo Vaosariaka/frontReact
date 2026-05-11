@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_accessory",
+  "columns": [
+    {
+      "field": "id_product_1",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_product_2",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_accessory` ("
+}

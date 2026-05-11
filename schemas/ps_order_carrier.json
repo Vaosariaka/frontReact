@@ -1,0 +1,78 @@
+{
+  "table_name": "ps_order_carrier",
+  "columns": [
+    {
+      "field": "id_order_carrier",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_order",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_carrier",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order_invoice",
+      "type": "int(11) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "weight",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "shipping_cost_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "shipping_cost_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "tracking_number",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_carrier` ("
+}

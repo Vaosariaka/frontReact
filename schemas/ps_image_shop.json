@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_image_shop",
+  "columns": [
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_image",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "cover",
+      "type": "tinyint(1) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_image_shop` ("
+}

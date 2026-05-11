@@ -1,0 +1,78 @@
+{
+  "table_name": "ps_emailsubscription",
+  "columns": [
+    {
+      "field": "id",
+      "type": "int(6)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_shop",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "id_shop_group",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "email",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "newsletter_date_add",
+      "type": "datetime",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "ip_registration_newsletter",
+      "type": "varchar(15)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "http_referer",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(10)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_emailsubscription` ("
+}

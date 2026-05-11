@@ -1,0 +1,70 @@
+{
+  "table_name": "ps_supply_order_receipt_history",
+  "columns": [
+    {
+      "field": "id_supply_order_receipt_history",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_supply_order_detail",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_employee",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "employee_lastname",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "employee_firstname",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "id_supply_order_state",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "quantity",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_supply_order_receipt_history` ("
+}

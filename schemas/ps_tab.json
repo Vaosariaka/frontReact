@@ -1,0 +1,94 @@
+{
+  "table_name": "ps_tab",
+  "columns": [
+    {
+      "field": "id_tab",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_parent",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "position",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "module",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "class_name",
+      "type": "varchar(64)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "route_name",
+      "type": "varchar(256)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "enabled",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "icon",
+      "type": "varchar(32)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "wording",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "wording_domain",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_tab` ("
+}

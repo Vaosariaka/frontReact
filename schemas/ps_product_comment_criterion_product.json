@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_product_comment_criterion_product",
+  "columns": [
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_product_comment_criterion",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_product_comment_criterion_product` ("
+}

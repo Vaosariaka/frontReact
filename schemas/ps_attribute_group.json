@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_attribute_group",
+  "columns": [
+    {
+      "field": "id_attribute_group",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "is_color_group",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "group_type",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "position",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_attribute_group` ("
+}

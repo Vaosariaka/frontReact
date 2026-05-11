@@ -1,0 +1,14 @@
+{
+  "table_name": "ps_customer_message_sync_imap",
+  "columns": [
+    {
+      "field": "md5_header",
+      "type": "varbinary(32)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_customer_message_sync_imap` ("
+}

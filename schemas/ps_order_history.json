@@ -1,0 +1,46 @@
+{
+  "table_name": "ps_order_history",
+  "columns": [
+    {
+      "field": "id_order_history",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_employee",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order_state",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_history` ("
+}

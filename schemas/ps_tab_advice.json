@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_tab_advice",
+  "columns": [
+    {
+      "field": "id_tab",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_advice",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_tab_advice` ("
+}

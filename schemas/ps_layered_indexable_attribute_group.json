@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_layered_indexable_attribute_group",
+  "columns": [
+    {
+      "field": "id_attribute_group",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "indexable",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_layered_indexable_attribute_group` ("
+}

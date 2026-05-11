@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_webservice_permission",
+  "columns": [
+    {
+      "field": "id_webservice_permission",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "resource",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "method",
+      "type": "enum('GET','POST','PUT','PATCH','DELETE','HEAD')",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_webservice_account",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_webservice_permission` ("
+}

@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_layered_indexable_attribute_lang_value",
+  "columns": [
+    {
+      "field": "id_attribute",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "url_name",
+      "type": "varchar(128)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "meta_title",
+      "type": "varchar(128)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_layered_indexable_attribute_lang_value` ("
+}

@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_order_invoice_tax",
+  "columns": [
+    {
+      "field": "id_order_invoice",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "type",
+      "type": "varchar(15)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_tax",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "amount",
+      "type": "decimal(10,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_invoice_tax` ("
+}

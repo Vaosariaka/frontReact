@@ -1,0 +1,46 @@
+{
+  "table_name": "ps_linksmenutop_lang",
+  "columns": [
+    {
+      "field": "id_linksmenutop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "label",
+      "type": "varchar(128)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "link",
+      "type": "varchar(128)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_linksmenutop_lang` ("
+}

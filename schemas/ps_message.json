@@ -1,0 +1,70 @@
+{
+  "table_name": "ps_message",
+  "columns": [
+    {
+      "field": "id_message",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_cart",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_customer",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_employee",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "message",
+      "type": "mediumtext",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "private",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_message` ("
+}

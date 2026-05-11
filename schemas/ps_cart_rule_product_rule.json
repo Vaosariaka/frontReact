@@ -1,0 +1,30 @@
+{
+  "table_name": "ps_cart_rule_product_rule",
+  "columns": [
+    {
+      "field": "id_product_rule",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_product_rule_group",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "type",
+      "type": "enum('products','categories','attributes','manufacturers','suppliers')",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_cart_rule_product_rule` ("
+}

@@ -1,0 +1,166 @@
+{
+  "table_name": "ps_carrier",
+  "columns": [
+    {
+      "field": "id_carrier",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_reference",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "name",
+      "type": "varchar(64)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "url",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "deleted",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "shipping_handling",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "range_behavior",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "is_module",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "is_free",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "shipping_external",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "need_range",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "external_module_name",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "shipping_method",
+      "type": "int(2)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "position",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "max_width",
+      "type": "int(10)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "max_height",
+      "type": "int(10)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "max_depth",
+      "type": "int(10)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "max_weight",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "grade",
+      "type": "int(10)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_carrier` ("
+}

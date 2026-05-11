@@ -1,0 +1,30 @@
+{
+  "table_name": "ps_product_comment_criterion",
+  "columns": [
+    {
+      "field": "id_product_comment_criterion",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_product_comment_criterion_type",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_product_comment_criterion` ("
+}

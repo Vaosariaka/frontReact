@@ -1,0 +1,54 @@
+{
+  "table_name": "ps_eventbus_type_sync",
+  "columns": [
+    {
+      "field": "type",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "offset",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "lang_iso",
+      "type": "varchar(3)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "full_sync_finished",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "last_sync_date",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_eventbus_type_sync` ("
+}

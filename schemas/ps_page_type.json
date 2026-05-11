@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_page_type",
+  "columns": [
+    {
+      "field": "id_page_type",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "name",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_page_type` ("
+}

@@ -1,0 +1,110 @@
+{
+  "table_name": "ps_order_payment",
+  "columns": [
+    {
+      "field": "id_order_payment",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "order_reference",
+      "type": "varchar(9)",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_currency",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "amount",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "payment_method",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "conversion_rate",
+      "type": "decimal(13,6)",
+      "null": "NO",
+      "key": "",
+      "default": "1.000000",
+      "extra": ""
+    },
+    {
+      "field": "transaction_id",
+      "type": "varchar(254)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "card_number",
+      "type": "varchar(254)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "card_brand",
+      "type": "varchar(254)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "card_expiration",
+      "type": "char(7)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "card_holder",
+      "type": "varchar(254)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_employee",
+      "type": "int(11)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_payment` ("
+}

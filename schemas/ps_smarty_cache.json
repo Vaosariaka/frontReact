@@ -1,0 +1,46 @@
+{
+  "table_name": "ps_smarty_cache",
+  "columns": [
+    {
+      "field": "id_smarty_cache",
+      "type": "char(40)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "name",
+      "type": "char(40)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "cache_id",
+      "type": "varchar(254)",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "modified",
+      "type": "timestamp",
+      "null": "NO",
+      "key": "MUL",
+      "default": "current_timestamp()",
+      "extra": ""
+    },
+    {
+      "field": "content",
+      "type": "longtext",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_smarty_cache` ("
+}

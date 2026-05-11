@@ -1,0 +1,270 @@
+{
+  "table_name": "ps_cart_rule",
+  "columns": [
+    {
+      "field": "id_cart_rule",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_customer",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "date_from",
+      "type": "datetime",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_to",
+      "type": "datetime",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "description",
+      "type": "mediumtext",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "quantity",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "quantity_per_user",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "priority",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "partial_use",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "code",
+      "type": "varchar(254)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "minimum_amount",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "minimum_amount_tax",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "minimum_amount_currency",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "minimum_amount_shipping",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "country_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "carrier_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "group_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "cart_rule_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "shop_restriction",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "free_shipping",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "reduction_percent",
+      "type": "decimal(5,2)",
+      "null": "NO",
+      "key": "",
+      "default": "0.00",
+      "extra": ""
+    },
+    {
+      "field": "reduction_amount",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "reduction_tax",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "reduction_currency",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "reduction_product",
+      "type": "int(10)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "reduction_exclude_special",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "gift_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "gift_product_attribute",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "highlight",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_upd",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_cart_rule` ("
+}

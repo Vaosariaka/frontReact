@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_memcached_servers",
+  "columns": [
+    {
+      "field": "id_memcached_server",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "ip",
+      "type": "varchar(254)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "port",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "weight",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_memcached_servers` ("
+}

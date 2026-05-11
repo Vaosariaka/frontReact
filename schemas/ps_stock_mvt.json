@@ -1,0 +1,126 @@
+{
+  "table_name": "ps_stock_mvt",
+  "columns": [
+    {
+      "field": "id_stock_mvt",
+      "type": "bigint(20)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_stock",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order",
+      "type": "int(11)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_supply_order",
+      "type": "int(11)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_stock_mvt_reason",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_employee",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "employee_lastname",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "employee_firstname",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "physical_quantity",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "sign",
+      "type": "smallint(6)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "price_te",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "last_wa",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "current_wa",
+      "type": "decimal(20,6)",
+      "null": "YES",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "referer",
+      "type": "bigint(20)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_stock_mvt` ("
+}

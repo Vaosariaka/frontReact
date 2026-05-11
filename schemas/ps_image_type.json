@@ -1,0 +1,78 @@
+{
+  "table_name": "ps_image_type",
+  "columns": [
+    {
+      "field": "id_image_type",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "name",
+      "type": "varchar(64)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "width",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "height",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "products",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "categories",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "manufacturers",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "suppliers",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "stores",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_image_type` ("
+}

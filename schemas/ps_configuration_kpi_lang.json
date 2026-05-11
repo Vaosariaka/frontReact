@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_configuration_kpi_lang",
+  "columns": [
+    {
+      "field": "id_configuration_kpi",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "value",
+      "type": "mediumtext",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_upd",
+      "type": "datetime",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_configuration_kpi_lang` ("
+}

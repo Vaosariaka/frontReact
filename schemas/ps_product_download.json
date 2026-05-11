@@ -1,0 +1,86 @@
+{
+  "table_name": "ps_product_download",
+  "columns": [
+    {
+      "field": "id_product_download",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "display_filename",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "filename",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_expiration",
+      "type": "datetime",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "nb_days_accessible",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "nb_downloadable",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "is_shareable",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_product_download` ("
+}

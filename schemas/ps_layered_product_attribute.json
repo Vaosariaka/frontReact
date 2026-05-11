@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_layered_product_attribute",
+  "columns": [
+    {
+      "field": "id_attribute",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_attribute_group",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "1",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_layered_product_attribute` ("
+}

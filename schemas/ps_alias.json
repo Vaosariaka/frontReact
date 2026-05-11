@@ -1,0 +1,38 @@
+{
+  "table_name": "ps_alias",
+  "columns": [
+    {
+      "field": "id_alias",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "alias",
+      "type": "varchar(191)",
+      "null": "NO",
+      "key": "UNI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "search",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_alias` ("
+}

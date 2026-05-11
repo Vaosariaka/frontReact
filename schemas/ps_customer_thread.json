@@ -1,0 +1,102 @@
+{
+  "table_name": "ps_customer_thread",
+  "columns": [
+    {
+      "field": "id_customer_thread",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_contact",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_customer",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "status",
+      "type": "enum('open','closed','pending1','pending2')",
+      "null": "NO",
+      "key": "",
+      "default": "open",
+      "extra": ""
+    },
+    {
+      "field": "email",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "token",
+      "type": "varchar(12)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_upd",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_customer_thread` ("
+}

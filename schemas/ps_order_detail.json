@@ -1,0 +1,398 @@
+{
+  "table_name": "ps_order_detail",
+  "columns": [
+    {
+      "field": "id_order_detail",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_order",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_order_invoice",
+      "type": "int(11)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_warehouse",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_id",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_attribute_id",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_customization",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_name",
+      "type": "mediumtext",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity_in_stock",
+      "type": "int(10)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity_refunded",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity_return",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity_reinjected",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "product_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "reduction_percent",
+      "type": "decimal(5,2)",
+      "null": "NO",
+      "key": "",
+      "default": "0.00",
+      "extra": ""
+    },
+    {
+      "field": "reduction_amount",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "reduction_amount_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "reduction_amount_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "group_reduction",
+      "type": "decimal(5,2)",
+      "null": "NO",
+      "key": "",
+      "default": "0.00",
+      "extra": ""
+    },
+    {
+      "field": "product_quantity_discount",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "product_ean13",
+      "type": "varchar(13)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_isbn",
+      "type": "varchar(32)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_upc",
+      "type": "varchar(12)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_mpn",
+      "type": "varchar(40)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_reference",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_supplier_reference",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "product_weight",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_tax_rules_group",
+      "type": "int(11) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "tax_computation_method",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "tax_name",
+      "type": "varchar(16)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "tax_rate",
+      "type": "decimal(10,3)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000",
+      "extra": ""
+    },
+    {
+      "field": "ecotax",
+      "type": "decimal(17,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "ecotax_tax_rate",
+      "type": "decimal(5,3)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000",
+      "extra": ""
+    },
+    {
+      "field": "discount_quantity_applied",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "download_hash",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "download_nb",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "download_deadline",
+      "type": "datetime",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "total_price_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_price_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "unit_price_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "unit_price_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_shipping_price_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_shipping_price_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "purchase_supplier_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "original_product_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "original_wholesale_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_refunded_tax_excl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "total_refunded_tax_incl",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_detail` ("
+}

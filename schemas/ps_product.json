@@ -1,0 +1,454 @@
+{
+  "table_name": "ps_product",
+  "columns": [
+    {
+      "field": "id_product",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_supplier",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_manufacturer",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_category_default",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop_default",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "id_tax_rules_group",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "on_sale",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "online_only",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "ean13",
+      "type": "varchar(13)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "isbn",
+      "type": "varchar(32)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "upc",
+      "type": "varchar(12)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "mpn",
+      "type": "varchar(40)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "ecotax",
+      "type": "decimal(17,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "quantity",
+      "type": "int(10)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "minimal_quantity",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "low_stock_threshold",
+      "type": "int(10)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "low_stock_alert",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "wholesale_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "unity",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "unit_price",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "unit_price_ratio",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "additional_shipping_cost",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "reference",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "supplier_reference",
+      "type": "varchar(64)",
+      "null": "YES",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "location",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "width",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "height",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "depth",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "weight",
+      "type": "decimal(20,6)",
+      "null": "NO",
+      "key": "",
+      "default": "0.000000",
+      "extra": ""
+    },
+    {
+      "field": "out_of_stock",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "2",
+      "extra": ""
+    },
+    {
+      "field": "additional_delivery_times",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "quantity_discount",
+      "type": "tinyint(1)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "customizable",
+      "type": "tinyint(2)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "uploadable_files",
+      "type": "tinyint(4)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "text_fields",
+      "type": "tinyint(4)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "active",
+      "type": "tinyint(1) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "redirect_type",
+      "type": "enum('','404','410','301-product','302-product','301-category','302-category','200-displayed','404-displayed','410-displayed','default')",
+      "null": "NO",
+      "key": "",
+      "default": "default",
+      "extra": ""
+    },
+    {
+      "field": "id_type_redirected",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "available_for_order",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "available_date",
+      "type": "date",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "show_condition",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "condition",
+      "type": "enum('new','used','refurbished')",
+      "null": "NO",
+      "key": "",
+      "default": "new",
+      "extra": ""
+    },
+    {
+      "field": "show_price",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "indexed",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "visibility",
+      "type": "enum('both','catalog','search','none')",
+      "null": "NO",
+      "key": "",
+      "default": "both",
+      "extra": ""
+    },
+    {
+      "field": "cache_is_pack",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "cache_has_attachments",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "is_virtual",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "cache_default_attribute",
+      "type": "int(10) unsigned",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "datetime",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_upd",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "advanced_stock_management",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "pack_stock_type",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "3",
+      "extra": ""
+    },
+    {
+      "field": "state",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "MUL",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "product_type",
+      "type": "enum('standard','pack','virtual','combinations','')",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_product` ("
+}

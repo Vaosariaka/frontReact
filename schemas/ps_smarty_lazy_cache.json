@@ -1,0 +1,46 @@
+{
+  "table_name": "ps_smarty_lazy_cache",
+  "columns": [
+    {
+      "field": "template_hash",
+      "type": "varchar(32)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "cache_id",
+      "type": "varchar(191)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "compile_id",
+      "type": "varchar(32)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "filepath",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "last_update",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "0000-00-00 00:00:00",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_smarty_lazy_cache` ("
+}

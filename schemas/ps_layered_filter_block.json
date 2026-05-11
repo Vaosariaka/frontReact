@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_layered_filter_block",
+  "columns": [
+    {
+      "field": "hash",
+      "type": "char(32)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "data",
+      "type": "text",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_layered_filter_block` ("
+}

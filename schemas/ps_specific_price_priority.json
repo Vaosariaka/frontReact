@@ -1,0 +1,30 @@
+{
+  "table_name": "ps_specific_price_priority",
+  "columns": [
+    {
+      "field": "id_specific_price_priority",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_product",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "priority",
+      "type": "varchar(80)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_specific_price_priority` ("
+}

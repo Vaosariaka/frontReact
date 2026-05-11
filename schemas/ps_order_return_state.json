@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_order_return_state",
+  "columns": [
+    {
+      "field": "id_order_return_state",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "color",
+      "type": "varchar(32)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_order_return_state` ("
+}

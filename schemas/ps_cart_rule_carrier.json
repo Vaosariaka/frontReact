@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_cart_rule_carrier",
+  "columns": [
+    {
+      "field": "id_cart_rule",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_carrier",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_cart_rule_carrier` ("
+}

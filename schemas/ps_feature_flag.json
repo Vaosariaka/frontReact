@@ -1,0 +1,70 @@
+{
+  "table_name": "ps_feature_flag",
+  "columns": [
+    {
+      "field": "id_feature_flag",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "name",
+      "type": "varchar(191)",
+      "null": "NO",
+      "key": "UNI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "state",
+      "type": "tinyint(1)",
+      "null": "NO",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    },
+    {
+      "field": "label_wording",
+      "type": "varchar(512)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "label_domain",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "description_wording",
+      "type": "varchar(512)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "description_domain",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    },
+    {
+      "field": "stability",
+      "type": "varchar(64)",
+      "null": "NO",
+      "key": "",
+      "default": "beta",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_feature_flag` ("
+}

@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_gsitemap_sitemap",
+  "columns": [
+    {
+      "field": "link",
+      "type": "varchar(255)",
+      "null": "YES",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11)",
+      "null": "YES",
+      "key": "",
+      "default": "0",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_gsitemap_sitemap` ("
+}

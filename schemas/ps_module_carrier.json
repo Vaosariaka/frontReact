@@ -1,0 +1,30 @@
+{
+  "table_name": "ps_module_carrier",
+  "columns": [
+    {
+      "field": "id_module",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "1",
+      "extra": ""
+    },
+    {
+      "field": "id_reference",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_module_carrier` ("
+}

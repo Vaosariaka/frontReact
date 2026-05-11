@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_cms_category_shop",
+  "columns": [
+    {
+      "field": "id_cms_category",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "id_shop",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_cms_category_shop` ("
+}

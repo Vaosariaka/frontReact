@@ -1,0 +1,14 @@
+{
+  "table_name": "ps_info",
+  "columns": [
+    {
+      "field": "id_info",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_info` ("
+}

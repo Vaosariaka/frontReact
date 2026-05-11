@@ -1,0 +1,54 @@
+{
+  "table_name": "ps_mail",
+  "columns": [
+    {
+      "field": "id_mail",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "recipient",
+      "type": "varchar(126)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "template",
+      "type": "varchar(62)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "subject",
+      "type": "varchar(254)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_lang",
+      "type": "int(11) unsigned",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "date_add",
+      "type": "timestamp",
+      "null": "NO",
+      "key": "",
+      "default": "current_timestamp()",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_mail` ("
+}

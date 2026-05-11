@@ -1,0 +1,54 @@
+{
+  "table_name": "ps_eventbus_incremental_sync",
+  "columns": [
+    {
+      "field": "type",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "action",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "",
+      "default": "upsert",
+      "extra": ""
+    },
+    {
+      "field": "id_object",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_shop",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "lang_iso",
+      "type": "varchar(3)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "created_at",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_eventbus_incremental_sync` ("
+}

@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_eventbus_live_sync",
+  "columns": [
+    {
+      "field": "shop_content",
+      "type": "varchar(50)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "last_change_at",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_eventbus_live_sync` ("
+}

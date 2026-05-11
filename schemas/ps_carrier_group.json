@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_carrier_group",
+  "columns": [
+    {
+      "field": "id_carrier",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_group",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_carrier_group` ("
+}

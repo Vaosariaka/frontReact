@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_module_access",
+  "columns": [
+    {
+      "field": "id_profile",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "id_authorization_role",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_module_access` ("
+}

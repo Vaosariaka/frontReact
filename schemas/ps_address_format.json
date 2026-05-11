@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_address_format",
+  "columns": [
+    {
+      "field": "id_country",
+      "type": "int(10) unsigned",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "format",
+      "type": "varchar(255)",
+      "null": "NO",
+      "key": "",
+      "default": "",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_address_format` ("
+}

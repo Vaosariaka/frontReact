@@ -81,7 +81,7 @@ Exemple (hook React simplifie):
 
 ```jsx
 import { useCallback, useRef, useState } from "react";
-import axios from "axios";
+0import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 
 const parser = new XMLParser({
@@ -158,6 +158,7 @@ export default {
 - Toujours envoyer `Content-Type: application/xml`.
 - Utiliser `responseType: "text"` pour lire le XML brut.
 - Parser le XML cote front, ne pas modifier le back.
+
 
 ## Workflow complet CSV -> PrestaShop (XML)
 

@@ -27,98 +27,78 @@ Definir le pseudo-code complet du flux d'import cote front React, avec validatio
 - Progression temps reel (polling ou SSE).
 - Rapport final telechargeable.
 
-## Pseudo-code (detaille, React)
+## Pseudo-code (detaille)
 ```
-const [file, setFile] = useState(null);
-const [loading, setLoading] = useState(false);
-const [errors, setErrors] = useState([]);
-const [preview, setPreview] = useState(null);
-const [canProceed, setCanProceed] = useState(false);
-const [validationSummary, setValidationSummary] = useState(null);
-const [report, setReport] = useState(null);
+function onSelectFile(file) {
+  state.file = file;
+  state.errors = [];
+  state.preview = null;
+}
 
-const onSelectFile = (nextFile) => {
-  setFile(nextFile);
-  setErrors([]);
-  setPreview(null);
-  setCanProceed(false);
-  setValidationSummary(null);
-  setReport(null);
-};
-
-const onValidate = async () => {
-  if (!file) return;
-  setLoading(true);
-  setErrors([]);
+async function onValidate() {
+  assertFileSelected();
+  state.loading = true;
 
   try {
-    const res = await api.post('/api/import/validate', { file });
-    const result = res.data;
+    const result = await api.post('/api/import/validate', { file });
 
-    if (result.blockingErrors?.length > 0) {
-      setErrors(result.blockingErrors);
-      setCanProceed(false);
+    if (result.blockingErrors.length > 0) {
+      showErrors(result.blockingErrors);
+      state.canProceed = false;
       return;
     }
 
-    setCanProceed(true);
-    setValidationSummary(result.summary || null);
-  } catch (err) {
-    setErrors([err.message || 'Erreur validation']);
+    state.canProceed = true;
+    state.validationSummary = result.summary;
   } finally {
-    setLoading(false);
+    state.loading = false;
   }
-};
+}
 
-const onPreview = async () => {
-  if (!canProceed || !file) return;
-  setLoading(true);
+async function onPreview() {
+  assertCanProceed();
+  state.loading = true;
 
   try {
-    const res = await api.post('/api/import/preview', { file });
-    setPreview(res.data);
-  } catch (err) {
-    setErrors([err.message || 'Erreur preview']);
+    const preview = await api.post('/api/import/preview', { file });
+    state.preview = preview;
   } finally {
-    setLoading(false);
+    state.loading = false;
   }
-};
+}
 
-const onExecuteImport = async () => {
-  if (!preview || !file) return;
-  const ok = await confirmDialog(preview);
+async function onExecuteImport() {
+  assertPreviewReady();
+  const ok = await confirmDialog(state.preview);
   if (!ok) return;
 
-  setLoading(true);
+  state.loading = true;
   try {
-    const { jobId } = (await api.post('/api/import/execute', { file })).data;
+    const { jobId } = await api.post('/api/import/execute', { file });
     await pollImportStatus(jobId);
-  } catch (err) {
-    setErrors([err.message || 'Erreur import']);
   } finally {
-    setLoading(false);
+    state.loading = false;
   }
-};
+}
 
-const pollImportStatus = async (jobId) => {
+async function pollImportStatus(jobId) {
   while (true) {
-    const res = await api.get(`/api/import/status/${jobId}`);
-    const status = res.data;
+    const status = await api.get(`/api/import/status/${jobId}`);
 
     if (status.state === 'termine') {
-      const reportRes = await api.get(`/api/import/report/${jobId}`);
-      setReport(reportRes.data);
+      const report = await api.get(`/api/import/report/${jobId}`);
+      showReport(report);
       break;
     }
 
     if (status.state === 'erreur') {
-      setErrors([status.message || 'Erreur import']);
+      showError(status.message || 'Erreur import');
       break;
     }
 
     await wait(1500);
   }
-};
+}
 ```
 
 ## Cas d'erreur a gerer

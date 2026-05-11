@@ -1,0 +1,30 @@
+{
+  "table_name": "ps_required_field",
+  "columns": [
+    {
+      "field": "id_required_field",
+      "type": "int(11)",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": "auto_increment"
+    },
+    {
+      "field": "object_name",
+      "type": "varchar(32)",
+      "null": "NO",
+      "key": "MUL",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "field_name",
+      "type": "varchar(32)",
+      "null": "NO",
+      "key": "",
+      "default": "NULL",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_required_field` ("
+}

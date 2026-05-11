@@ -1,0 +1,22 @@
+{
+  "table_name": "ps_smarty_last_flush",
+  "columns": [
+    {
+      "field": "type",
+      "type": "enum('compile','template')",
+      "null": "NO",
+      "key": "PRI",
+      "default": "NULL",
+      "extra": ""
+    },
+    {
+      "field": "last_flush",
+      "type": "datetime",
+      "null": "NO",
+      "key": "",
+      "default": "0000-00-00 00:00:00",
+      "extra": ""
+    }
+  ],
+  "create_table_statement": "CREATE TABLE `ps_smarty_last_flush` ("
+}
