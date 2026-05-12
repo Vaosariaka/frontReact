@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 import ProductList from "./list/productList";
-import EmployeeList from "./list/employeeList";
-import ImportProduct from "./affichageImport/importProduct";
-import ImportCombinations from "./affichageImport/importCombinations";
-import ImportOrders from "./affichageImport/importOrders";
+import ImportProduct from "./pagesEmployee/affichageImport/importProduct";
+import ImportCombinations from "./pagesEmployee/affichageImport/importCombinations";
+import ImportOrders from "./pagesEmployee/affichageImport/importOrders";
 import { useAuth } from "./auth/AuthContext";
-import Login from "./auth/Login";
+import LoginEmployee from "./auth/LoginEmployee";
+import LoginClient from "./auth/LoginClient";
+import LoginSelector from "./auth/LoginSelector";
 
 import {
   fetchProducts,
@@ -16,12 +17,15 @@ import {
   fetchEmployees,
 } from "./api/employeesApi";
 
+
 import {
   createProduct,
-} from "./import/importApiProduct";
+} from "./pagesEmployee/import/importApiProduct"; 
 
-import { createCombinationFromCsvRow } from "./import/importApiCombinations";
-import { createOrderFromCsvRow } from "./import/importApiOrders";
+
+
+import { createCombinationFromCsvRow } from "./pagesEmployee/import/importApiCombinations";
+import { createOrderFromCsvRow } from "./pagesEmployee/import/importApiOrders";
 
 function App() {
   const { user, logout } = useAuth();
@@ -29,8 +33,10 @@ function App() {
   const [products, setProducts] =
     useState([]);
 
-  const [employees, setEmployees] =
-    useState([]);
+
+
+  const [loginType, setLoginType] = useState(null);
+
 
   useEffect(() => {
 
@@ -40,13 +46,12 @@ function App() {
 
       const e = await fetchEmployees();
 
+
       setProducts(
         Array.isArray(p) ? p : [p]
       );
 
-      setEmployees(
-        Array.isArray(e) ? e : [e]
-      );
+   
     };
 
     load();
@@ -54,8 +59,18 @@ function App() {
   }, []);
 
   if (!user) {
-    return <Login />;
+    if (!loginType) {
+      return <LoginSelector onSelect={setLoginType} />;
+    }
+    if (loginType === "employee") {
+      return <LoginEmployee />;
+    }
+    if (loginType === "customer") {
+      return <LoginClient />;
+    }
   }
+
+  
 
   return (
     <div>
@@ -68,10 +83,6 @@ function App() {
 
       <ProductList
         products={products}
-        getTextValue={(value) => value}
-      />
-      <EmployeeList
-        employees={employees}
         getTextValue={(value) => value}
       />
 
