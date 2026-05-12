@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 
+
 export default function Login() {
-  const { login } = useAuth();
+  const { loginCustomer } = useAuth();
   const [form, setForm] = useState({
-    email: "admin@demo.com",
-    password: "admin123",
+    email: "",
+    password: "",
   });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -15,16 +17,43 @@ export default function Login() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const ok = await login(form);
-    if (!ok) setError("Login invalide");
+    setLoading(true);
+    const ok = await loginCustomer(form.email, form.password);
+    setLoading(false);
+    if (!ok) {
+      setError("Email ou mot de passe invalide");
+    }
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input name="email" value={form.email} onChange={onChange} />
-      <input name="password" type="password" value={form.password} onChange={onChange} />
-      <button type="submit">Se connecter</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="p-4 border rounded">
+      <h2>Accès Client</h2>
+      <form onSubmit={onSubmit}>
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={onChange}
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={onChange}
+            placeholder="Mot de passe"
+            required
+          />
+        </div>
+        <button type="submit" disabled={loading}>
+          {loading ? "Connexion..." : "Se connecter"}
+        </button>
+        {error && <p style={{ marginTop: "10px", color: "red" }}>{error}</p>}
+      </form>
+    </div>
   );
 }

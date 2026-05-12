@@ -11,6 +11,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
+      "/bo": {
+        target: "http://localhost/prestashop/admin749mjbpvcgrvnjps5iq",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/bo/, ""),
+      },
     },
   },
 })
