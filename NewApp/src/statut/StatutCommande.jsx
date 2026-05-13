@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchOrders, updateOrderState } from "../../api/ordersApi";
+import { fetchOrders, updateOrderState } from "../api/ordersApi";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);

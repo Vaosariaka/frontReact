@@ -1,0 +1,86 @@
+.client-dashboard {
+  padding: 24px;
+  text-align: left;
+}
+
+.client-title {
+  margin: 0 0 10px;
+  font-size: 32px;
+}
+
+.logout-btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #0f766e;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #115e59;
+}
+
+.client-subtitle {
+  margin: 18px 0 12px;
+  font-size: 22px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dbe3ea;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+}
+
+.client-table th {
+  background: #f4f8fb;
+  color: #102a43;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.client-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.product-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #d9e2ec;
+}
+
+@media (max-width: 768px) {
+  .client-dashboard {
+    padding: 14px;
+  }
+
+  .client-title {
+    font-size: 24px;
+  }
+
+  .client-subtitle {
+    font-size: 18px;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+}

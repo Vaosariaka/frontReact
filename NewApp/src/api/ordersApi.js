@@ -21,7 +21,6 @@ export async function fetchOrders() {
 }
 
 export async function updateOrderState(orderId, stateId) {
-  // TODO: adapter selon la methode Prestashop (souvent via order_histories)
   return axios.post(
     "/api/api/order_histories",
     stateId,

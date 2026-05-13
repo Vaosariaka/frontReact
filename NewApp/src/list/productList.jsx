@@ -3,7 +3,7 @@ function ProductList({ products, getTextValue }) {
     <ul>
       {products.map((p) => (
         <li key={p.id}>
-          {getTextValue(p.price)}
+          {getTextValue(p)}
         </li>
       ))}
     </ul>
