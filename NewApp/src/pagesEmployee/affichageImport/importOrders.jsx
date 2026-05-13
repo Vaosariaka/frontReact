@@ -7,20 +7,7 @@ function ImportOrders({ onCreate }) {
   const [message, setMessage] = useState(null);
   const [fileName, setFileName] = useState("");
   const csvPath = "/csv/import-data-mai-26 - fichier3.csv";
-  const defaults = {
-    langId: 1,
-    currencyId: 1,
-    carrierId: 1,
-    shopId: 1,
-    shopGroupId: 1,
-    countryId: 1,
-    city: "Antananarivo",
-    postcode: "101",
-    addressAlias: "Adresse",
-    payment: "Import CSV",
-    module: "bankwire",
-    defaultStateId: 1,
-  };
+  
 
   const handleLoadCsv = () => {
     setFileName(csvPath);
@@ -68,7 +55,7 @@ function ImportOrders({ onCreate }) {
           continue;
         }
 
-        await onCreate(row, defaults);
+        await onCreate(row);
         imported += 1;
       }
 
