@@ -4,8 +4,8 @@ import { useAuth } from "./AuthContext";
 export default function Login() {
   const { loginEmployee } = useAuth();
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "demo.employee@prestashop.local",
+    password: "demo1234",
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

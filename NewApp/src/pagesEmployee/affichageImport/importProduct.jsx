@@ -22,6 +22,7 @@ function ProductImport({ onCreate }) {
       header: true,
       skipEmptyLines: true,
       delimiter: ",",
+      transformHeader: (h) => String(h || "").replace(/^\uFEFF/, "").trim(),
       complete: (results) => {
         setRows(results.data || []);
       },
@@ -47,32 +48,38 @@ function ProductImport({ onCreate }) {
 
     let imported = 0;
     let skipped = 0;
+    const errors = [];
 
-    try {
-      for (const row of rows) {
-        const nom = row["nom"] || "";
-        const reference = row["reference"] || "";
-        const prixTtc = row["prix_ttc"] || "";
+    for (const row of rows) {
+      const nom = row["nom"] || "";
+      const reference = row["reference"] || "";
+      const prixTtc = row["prix_ttc"] || "";
 
-        if (!nom || !reference || !prixTtc) {
-          skipped += 1;
-          continue;
-        }
-
-        await onCreate(row, defaults);
-        imported += 1;
+      if (!nom || !reference || !prixTtc) {
+        skipped += 1;
+        continue;
       }
 
-      setMessage(
-        `Import termine: ${imported} ok, ${skipped} ignores.`
-      );
-      
-    } catch (err) {
-      console.error(err);
-      setMessage("Erreur lors de l'import CSV ❌");
-    } finally {
-      setLoading(false);
+      try {
+        await onCreate(row, defaults);
+        imported += 1;
+      } catch (err) {
+        const apiError = err?.response?.data
+          ? String(err.response.data).slice(0, 180)
+          : (err?.message || "erreur inconnue");
+        errors.push(`${reference}: ${apiError}`);
+      }
     }
+
+    setMessage(
+      errors.length
+        ? `Import termine: ${imported} ok, ${skipped} ignores, ${errors.length} erreurs.`
+        : `Import termine: ${imported} ok, ${skipped} ignores.`
+    );
+    if (errors.length) {
+      console.error("Erreurs import produits:", errors);
+    }
+    setLoading(false);
   };
 
   return (

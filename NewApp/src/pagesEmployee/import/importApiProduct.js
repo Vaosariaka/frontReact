@@ -152,14 +152,7 @@ export const createProduct = async (row, defaults = {}) => {
   const langId = defaults.langId || 1;
   const parentCategoryId = defaults.parentCategoryId || 2;
   const defaultTaxRulesGroupId = defaults.taxRulesGroupId || 1;
-  const country= await axios.get(`/api/api/countries?display=full&filter[name]=France`, {
-    headers: {
-      Authorization: `Basic ${btoa(apiKey + ":")}`,
-      Accept: "application/xml",
-    },
-    responseType: "text",
-  });
-  const ContryId=country.countryId || 8; // France
+  const countryId = defaults.countryId || 8; // France par defaut
 
   const categoryId = await ensureCategoryId({
     name: categorie,
@@ -187,12 +180,21 @@ export const createProduct = async (row, defaults = {}) => {
         "#text": nom || "",
       },
     },
+    link_rewrite: {
+      language: {
+        "@_id": String(langId),
+        "#text": slugify(nom) || "produit",
+      },
+    },
     reference: reference ? String(reference) : undefined,
     price: priceExcl !== null ? formatPrice(priceExcl) : undefined,
     wholesale_price: wholesalePrice !== null ? formatPrice(wholesalePrice) : undefined,
     id_tax_rules_group: String(taxRulesGroupId) ,
     id_category_default: categoryId ? String(categoryId) : undefined,
-    id_country_default: String(ContryId),
+    id_country_default: String(countryId),
+    visibility: "both",
+    available_for_order: "1",
+    show_price: "1",
     active: "1",
   };
 

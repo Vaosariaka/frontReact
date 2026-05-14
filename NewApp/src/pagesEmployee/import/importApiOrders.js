@@ -46,15 +46,30 @@ const splitName = (nom) => {
 
 const parsePurchases = (achat) => {
   if (!achat) return [];
-  const rawItems = String(achat)
+  const source = String(achat).trim();
+  const tupleRegex = /\("([^"]+)"\s*;\s*(\d+)\s*;\s*"([^"]*)"\)/g;
+  const items = [];
+  let match;
+
+  while ((match = tupleRegex.exec(source)) !== null) {
+    items.push({
+      reference: match[1].trim(),
+      quantity: Number(match[2]) || 1,
+      variant: match[3]?.trim() || "",
+    });
+  }
+
+  if (items.length) return items;
+
+  const rawItems = source
     .split(/[|,;]+/)
     .map((item) => item.trim())
     .filter(Boolean);
 
   return rawItems.map((item) => {
-    const match = item.match(/^([^:*x]+)[:*x](\d+)$/i);
-    if (match) {
-      return { reference: match[1].trim(), quantity: Number(match[2]) };
+    const m = item.match(/^([^:*x]+)[:*x](\d+)$/i);
+    if (m) {
+      return { reference: m[1].trim(), quantity: Number(m[2]) };
     }
     return { reference: item, quantity: 1 };
   });
@@ -115,6 +130,24 @@ const createCustomer = async ({ firstname, lastname, email, passwd, langId }) =>
 
   const payload = parser.parse(res.data);
   return payload?.prestashop?.customer?.id || null;
+};
+
+const fetchCustomerByEmail = async (email) => {
+  const res = await axios.get(
+    `/api/api/customers?display=full&filter[email]=${encodeURIComponent(email)}`,
+    {
+      headers: {
+        Authorization: `Basic ${btoa(apiKey + ":")}`,
+        Accept: "application/xml",
+      },
+      responseType: "text",
+    }
+  );
+
+  const payload = parser.parse(res.data);
+  const customer = payload?.prestashop?.customers?.customer;
+  if (!customer) return null;
+  return Array.isArray(customer) ? customer[0] : customer;
 };
 
 const fetchCustomerById = async (id) => {
@@ -299,13 +332,16 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
     throw new Error("Donnees client incompletes.");
   }
 
-  const customerId = await createCustomer({
-    firstname,
-    lastname,
-    email,
-    passwd: pwd,
-    langId,
-  });
+  const existingCustomer = await fetchCustomerByEmail(email);
+  const customerId = existingCustomer?.id
+    ? existingCustomer.id
+    : await createCustomer({
+        firstname,
+        lastname,
+        email,
+        passwd: pwd,
+        langId,
+      });
 
   const customer = await fetchCustomerById(customerId);
   const secureKey = customer?.secure_key || "";
@@ -393,6 +429,6 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
       totalShipping,
     },
     items,
-    dateAdd: date,
+    dateAdd: date || undefined,
   });
 };

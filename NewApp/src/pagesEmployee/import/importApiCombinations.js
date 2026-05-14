@@ -193,6 +193,32 @@ const createCombination = async ({ productId, optionValueId, priceImpact }) => {
   return payload?.prestashop?.combination?.id || null;
 };
 
+const fetchCombinationIdByOptionValue = async ({ productId, optionValueId }) => {
+  const res = await axios.get(
+    `/api/api/combinations?display=full&filter[id_product]=${encodeURIComponent(productId)}`,
+    {
+      headers: {
+        Authorization: `Basic ${btoa(apiKey + ":")}`,
+        Accept: "application/xml",
+      },
+      responseType: "text",
+    }
+  );
+
+  const payload = parser.parse(res.data);
+  const combinations = payload?.prestashop?.combinations?.combination || [];
+  const normalized = Array.isArray(combinations) ? combinations : [combinations];
+
+  const match = normalized.find((combination) => {
+    const values = combination?.associations?.product_option_values?.product_option_value;
+    if (!values) return false;
+    const valuesArr = Array.isArray(values) ? values : [values];
+    return valuesArr.some((v) => String(v?.id) === String(optionValueId));
+  });
+
+  return match?.id || null;
+};
+
 const fetchStockAvailableId = async ({ productId, combinationId }) => {
   const res = await axios.get(
     `/api/api/stock_availables?display=full&filter[id_product]=${encodeURIComponent(
@@ -273,11 +299,20 @@ export const createCombinationFromCsvRow = async (row, defaults = {}) => {
   });
 
   const priceImpact = toNumber(prix_vente_ttc) ?? 0;
-  const combinationId = await createCombination({
-    productId: product.id,
-    optionValueId: valueId,
-    priceImpact,
-  });
+  let combinationId = null;
+  try {
+    combinationId = await createCombination({
+      productId: product.id,
+      optionValueId: valueId,
+      priceImpact,
+    });
+  } catch {
+    // Souvent erreur "duplicate entry" après un rerun: on réutilise la combinaison existante.
+    combinationId = await fetchCombinationIdByOptionValue({
+      productId: product.id,
+      optionValueId: valueId,
+    });
+  }
 
   const quantity = toNumber(stock_initial) ?? 0;
   await upsertStockAvailable({

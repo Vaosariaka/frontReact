@@ -71,3 +71,27 @@ export const uploadProductImageFile = async (imageId, file) => {
       }
     );
   };
+
+const parseProductIdFromName = (fileName) => {
+  const base = String(fileName || "").split("/").pop() || "";
+  const noExt = base.replace(/\.[^.]+$/, "");
+  const match = noExt.match(/(\d+)$/);
+  return match ? Number(match[1]) : null;
+};
+
+export const importImageFromZipEntry = async ({ name, file }) => {
+  const productId = parseProductIdFromName(name);
+  if (!productId) {
+    throw new Error(`Impossible de determiner l'id produit depuis le nom: ${name}`);
+  }
+
+  const formData = new FormData();
+  formData.append("image", file, name);
+
+  await axios.post(`/api/api/images/products/${productId}`, formData, {
+    headers: {
+      Authorization: `Basic ${btoa(apiKey + ":")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

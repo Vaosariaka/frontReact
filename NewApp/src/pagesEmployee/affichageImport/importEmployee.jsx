@@ -35,36 +35,42 @@ function EmployeeImport({ onCreate }) {
 
     let imported = 0;
     let skipped = 0;
+    const errors = [];
 
-    try {
-      for (const row of rows) {
-        const date = row["date"] || row["Date"] || "";
-        const nom = row["nom"] || row["Nom"] || "";
-        const email = row["email"] || row["Email"] || "";
-        const pwd = row["pwd"] || row["Pwd"] || row["password"] || "";
-        const adresse = row["adresse"] || row["Adresse"] || "";
-        const achat = row["achat"] || row["Achat"] || "";
-        const etat = row["etat"] || row["Etat"] || "";
+    for (const row of rows) {
+      const date = row["date"] || row["Date"] || "";
+      const nom = row["nom"] || row["Nom"] || "";
+      const email = row["email"] || row["Email"] || "";
+      const pwd = row["pwd"] || row["Pwd"] || row["password"] || "";
+      const adresse = row["adresse"] || row["Adresse"] || "";
+      const achat = row["achat"] || row["Achat"] || "";
+      const etat = row["etat"] || row["Etat"] || "";
 
-        if (!nom || !email || !pwd) {
-          skipped += 1;
-          continue;
-        }
-
-        await onCreate({ date, nom, email, pwd, adresse, achat, etat });
-        imported += 1;
+      if (!nom || !email || !pwd) {
+        skipped += 1;
+        continue;
       }
 
-      setMessage(
-        `Import termine: ${imported} ok, ${skipped} ignores.`
-      );
-      
-    } catch (err) {
-      console.error(err);
-      setMessage("Erreur lors de l'import CSV ❌");
-    } finally {
-      setLoading(false);
+      try {
+        await onCreate({ date, nom, email, pwd, adresse, achat, etat });
+        imported += 1;
+      } catch (err) {
+        const apiError = err?.response?.data
+          ? String(err.response.data).slice(0, 180)
+          : (err?.message || "erreur inconnue");
+        errors.push(`${email || nom}: ${apiError}`);
+      }
     }
+
+    setMessage(
+      errors.length
+        ? `Import termine: ${imported} ok, ${skipped} ignores, ${errors.length} erreurs.`
+        : `Import termine: ${imported} ok, ${skipped} ignores.`
+    );
+    if (errors.length) {
+      console.error("Erreurs import employees:", errors);
+    }
+    setLoading(false);
   };
 
 

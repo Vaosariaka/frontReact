@@ -22,6 +22,7 @@ function ImportCombinations({ onCreate }) {
       header: true,
       skipEmptyLines: true,
       delimiter: ",",
+      transformHeader: (h) => String(h || "").replace(/^\uFEFF/, "").trim(),
       complete: (results) => {
         setRows(results.data || []);
       },
@@ -47,29 +48,38 @@ function ImportCombinations({ onCreate }) {
 
     let imported = 0;
     let skipped = 0;
+    const errors = [];
 
-    try {
-      for (const row of rows) {
-        const reference = row["reference"] || "";
-        const specificite = row["specificite"] || row["specificité"] || "";
-        const karazany = row["karazany"] || "";
+    for (const row of rows) {
+      const reference = row["reference"] || "";
+      const specificite = row["specificite"] || row["specificité"] || "";
+      const karazany = row["karazany"] || "";
 
-        if (!reference || !specificite || !karazany) {
-          skipped += 1;
-          continue;
-        }
-
-        await onCreate(row, defaults);
-        imported += 1;
+      if (!reference || !specificite || !karazany) {
+        skipped += 1;
+        continue;
       }
 
-      setMessage(`Import termine: ${imported} ok, ${skipped} ignores.`);
-    } catch (err) {
-      console.error(err);
-      setMessage("Erreur lors de l'import CSV ❌");
-    } finally {
-      setLoading(false);
+      try {
+        await onCreate(row, defaults);
+        imported += 1;
+      } catch (err) {
+        const apiError = err?.response?.data
+          ? String(err.response.data).slice(0, 180)
+          : (err?.message || "erreur inconnue");
+        errors.push(`${reference}/${specificite}/${karazany}: ${apiError}`);
+      }
     }
+
+    setMessage(
+      errors.length
+        ? `Import termine: ${imported} ok, ${skipped} ignores, ${errors.length} erreurs.`
+        : `Import termine: ${imported} ok, ${skipped} ignores.`
+    );
+    if (errors.length) {
+      console.error("Erreurs import declinaisons:", errors);
+    }
+    setLoading(false);
   };
 
   return (

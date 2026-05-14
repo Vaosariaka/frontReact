@@ -1,26 +1,37 @@
-import { useEffect, useState } from "react";
-import { fetchPanier } from "../api/panierApi";
-
+import { useMemo, useState } from "react";
+import { useAuth } from "../auth/AuthContext";
+import {
+  clearCart,
+  createOrderCOD,
+  getCartItems,
+  removeCartItem,
+  updateCartItemQty,
+} from "../api/frontOfficeStore";
 
 export default function PanierPage() {
-  const [panier, setPanier] = useState([]);
+  const { user } = useAuth();
+  const [items, setItems] = useState(() => getCartItems(user.id));
+  const [message, setMessage] = useState("");
 
-    useEffect(() => {
-    const load = async () => {
-        try {
-            const data = await fetchPanier();
-            setPanier(Array.isArray(data) ? data : [data]);
-        } catch (error) {
-            console.error("Erreur lors du chargement du panier:", error);
-            setPanier([]);
-        }
-    };
-    load();
-}, []);
+  const totalProducts = useMemo(
+    () => items.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0), 0),
+    [items]
+  );
+  const shippingCost = 0;
+  const total = totalProducts + shippingCost;
+
+  const onValidateOrder = () => {
+    if (!items.length) return;
+    const order = createOrderCOD(user, items);
+    setItems(getCartItems(user.id));
+    setMessage(`Commande ${order.id} validee`);
+  };
 
   return (
     <div>
-      <h2>Panier ({panier.length})</h2>
+      <h2>Panier ({items.length})</h2>
+      {message ? <p>{message}</p> : null}
+
       <div className="table-wrap">
         <table className="client-table">
           <thead>
@@ -29,27 +40,69 @@ export default function PanierPage() {
               <th>Photo</th>
               <th>Nom</th>
               <th>Prix</th>
-              <th>Quantité</th>
+              <th>Quantite</th>
+              <th>Total ligne</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {panier.map((panierItem) => (
-              <tr key={panierItem.id}>
-                <td>{panierItem.id || "-"}</td>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
                 <td>
-                  {panierItem.image ? (
-                    <img className="product-image" src={panierItem.image} alt={panierItem.name || "Produit"} />
+                  {item.image ? (
+                    <img className="product-image" src={item.image} alt={item.name || "Produit"} />
                   ) : (
                     "Pas d'image"
                   )}
                 </td>
-                <td>{panierItem.name || "-"}</td>
-                <td>{panierItem.price ?? "-"}</td>
-                <td>{panierItem.quantity ?? "-"}</td>
+                <td>{item.name || "-"}</td>
+                <td>{item.price ?? "-"}</td>
+                <td>
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => setItems(updateCartItemQty(user.id, item.id, e.target.value))}
+                    style={{ width: 72 }}
+                  />
+                </td>
+                <td>{(Number(item.price || 0) * Number(item.quantity || 0)).toFixed(2)}</td>
+                <td>
+                  <button className="logout-btn" onClick={() => setItems(removeCartItem(user.id, item.id))}>
+                    Retirer
+                  </button>
+                </td>
               </tr>
             ))}
+            {!items.length ? (
+              <tr>
+                <td colSpan="7">Votre panier est vide.</td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <p>Sous-total produits: {totalProducts.toFixed(2)}</p>
+        <p>Frais de livraison: {shippingCost.toFixed(2)}</p>
+        <p>Total a payer: {total.toFixed(2)}</p>
+        <p>Moyen de paiement: Paiement a la livraison</p>
+        <button className="logout-btn" disabled={!items.length} onClick={onValidateOrder}>
+          Valider la commande
+        </button>
+        <button
+          className="logout-btn"
+          style={{ marginLeft: 8 }}
+          disabled={!items.length}
+          onClick={() => {
+            clearCart(user.id);
+            setItems([]);
+          }}
+        >
+          Vider le panier
+        </button>
       </div>
     </div>
   );

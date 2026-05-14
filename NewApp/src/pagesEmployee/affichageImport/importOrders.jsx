@@ -18,6 +18,7 @@ function ImportOrders({ onCreate }) {
       header: true,
       skipEmptyLines: true,
       delimiter: ",",
+      transformHeader: (h) => String(h || "").replace(/^\uFEFF/, "").trim(),
       complete: (results) => {
         setRows(results.data || []);
       },
@@ -43,29 +44,38 @@ function ImportOrders({ onCreate }) {
 
     let imported = 0;
     let skipped = 0;
+    const errors = [];
 
-    try {
-      for (const row of rows) {
-        const nom = row["nom"] || "";
-        const email = row["email"] || "";
-        const pwd = row["pwd"] || "";
+    for (const row of rows) {
+      const nom = row["nom"] || "";
+      const email = row["email"] || "";
+      const pwd = row["pwd"] || "";
 
-        if (!nom || !email || !pwd) {
-          skipped += 1;
-          continue;
-        }
-
-        await onCreate(row);
-        imported += 1;
+      if (!nom || !email || !pwd) {
+        skipped += 1;
+        continue;
       }
 
-      setMessage(`Import termine: ${imported} ok, ${skipped} ignores.`);
-    } catch (err) {
-      console.error(err);
-      setMessage("Erreur lors de l'import CSV ❌");
-    } finally {
-      setLoading(false);
+      try {
+        await onCreate(row);
+        imported += 1;
+      } catch (err) {
+        const apiError = err?.response?.data
+          ? String(err.response.data).slice(0, 180)
+          : (err?.message || "erreur inconnue");
+        errors.push(`${email || nom || "ligne"}: ${apiError}`);
+      }
     }
+
+    setMessage(
+      errors.length
+        ? `Import termine: ${imported} ok, ${skipped} ignores, ${errors.length} erreurs.`
+        : `Import termine: ${imported} ok, ${skipped} ignores.`
+    );
+    if (errors.length) {
+      console.error("Erreurs import commandes:", errors);
+    }
+    setLoading(false);
   };
 
   return (

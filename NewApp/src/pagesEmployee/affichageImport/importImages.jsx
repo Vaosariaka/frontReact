@@ -51,19 +51,30 @@ function ImagesProductImport({ onCreate }) {
     }
 
     setLoading(true);
+    let imported = 0;
+    const errors = [];
 
-    try {
-      for (const image of files) {
+    for (const image of files) {
+      try {
         await onCreate(image);
+        imported += 1;
+      } catch (err) {
+        const apiError = err?.response?.data
+          ? String(err.response.data).slice(0, 180)
+          : (err?.message || "erreur inconnue");
+        errors.push(`${image.name}: ${apiError}`);
       }
-
-      setMessage("Import termine.");
-    } catch (err) {
-      console.error(err);
-      setMessage("Erreur import.");
-    } finally {
-      setLoading(false);
     }
+
+    setMessage(
+      errors.length
+        ? `Import termine: ${imported} ok, ${errors.length} erreurs.`
+        : `Import termine: ${imported} ok.`
+    );
+    if (errors.length) {
+      console.error("Erreurs import images:", errors);
+    }
+    setLoading(false);
   };
 
   return (

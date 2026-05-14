@@ -1,10 +1,4 @@
 import { useAuth } from "../auth/AuthContext";
-import ImportProduct from "./affichageImport/importProduct";
-import ImportCombinations from "./affichageImport/importCombinations";
-import ImportOrders from "./affichageImport/importOrders";
-import { createProduct } from "./import/importApiProduct";
-import { createCombinationFromCsvRow } from "./import/importApiCombinations";
-import { createOrderFromCsvRow } from "./import/importApiOrders";
 
 export default function EmployeeDashboard() {
     const { user, logout } = useAuth();
@@ -19,23 +13,13 @@ export default function EmployeeDashboard() {
             <button onClick={logout} style={{ padding: "8px 15px", marginBottom: "20px" }}>
                 Se déconnecter
             </button>
-
-            <section style={{ marginBottom: "30px" }}>
-                <h2>Importation de produits</h2>
-                <ImportProduct onCreate={createProduct} />
-            </section>
-
-            <section style={{ marginBottom: "30px" }}>
-                <h2>Importation de combinaisons</h2>
-                <ImportCombinations onCreate={createCombinationFromCsvRow} />
-            </section>
-
-            <section>
-                <h2>Importation de commandes</h2>
-                <ImportOrders onCreate={createOrderFromCsvRow} />
-            </section>
-
-            
+            <div style={{ display: "flex", gap: "14px", marginBottom: "20px", flexWrap: "wrap" }}>
+                <a href="/employee/imports">Importer les 4 fichiers</a>
+                <a href="/employee/reset">Reinitialiser les donnees</a>
+                <a href="/employee/statut-commande">Commandes: changer etat</a>
+                <a href="/employee/sync-backoffice">Controle Sync BackOffice</a>
+            </div>
+            <p>Choisir une action Backoffice depuis les liens ci-dessus.</p>
         </div>
     );
 }
