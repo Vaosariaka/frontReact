@@ -278,8 +278,9 @@ const upsertStockAvailable = async ({
 
 export const createCombinationFromCsvRow = async (row, defaults = {}) => {
   const { reference, specificite, karazany, stock_initial, prix_vente_ttc } = row;
-  if (!reference || !specificite || !karazany) {
-    throw new Error("Donnees manquantes pour la declinaison.");
+  if (!reference) {
+    // Sans reference, on ne peut pas rattacher la ligne a un produit.
+    return null;
   }
 
   const langId = defaults.langId || 1;
@@ -291,27 +292,45 @@ export const createCombinationFromCsvRow = async (row, defaults = {}) => {
     throw new Error(`Produit introuvable pour la reference: ${reference}`);
   }
 
-  const groupId = await ensureProductOptionId({ name: specificite, langId });
-  const valueId = await ensureProductOptionValueId({
-    name: karazany,
-    groupId,
-    langId,
-  });
+  const hasDeclinaison = Boolean(specificite && karazany);
 
   const priceImpact = toNumber(prix_vente_ttc) ?? 0;
-  let combinationId = null;
-  try {
-    combinationId = await createCombination({
-      productId: product.id,
-      optionValueId: valueId,
-      priceImpact,
+  let combinationId = 0;
+  if (hasDeclinaison) {
+    const groupId = await ensureProductOptionId({ name: specificite, langId });
+    const valueId = await ensureProductOptionValueId({
+      name: karazany,
+      groupId,
+      langId,
     });
-  } catch {
-    // Souvent erreur "duplicate entry" après un rerun: on réutilise la combinaison existante.
-    combinationId = await fetchCombinationIdByOptionValue({
+
+    try {
+      combinationId = await createCombination({
+        productId: product.id,
+        optionValueId: valueId,
+        priceImpact,
+      });
+    } catch {
+      // Souvent erreur "duplicate entry" après un rerun: on réutilise la combinaison existante.
+      combinationId = await fetchCombinationIdByOptionValue({
+        productId: product.id,
+        optionValueId: valueId,
+      });
+    }
+  } else {
+    // Ligne sans declinaison: on traite comme stock du produit simple.
+    combinationId = 0;
+  }
+
+  if (!hasDeclinaison) {
+    await upsertStockAvailable({
       productId: product.id,
-      optionValueId: valueId,
+      combinationId: 0,
+      quantity: toNumber(stock_initial) ?? 0,
+      shopId,
+      shopGroupId,
     });
+    return 0;
   }
 
   const quantity = toNumber(stock_initial) ?? 0;

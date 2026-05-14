@@ -52,10 +52,7 @@ function ImportCombinations({ onCreate }) {
 
     for (const row of rows) {
       const reference = row["reference"] || "";
-      const specificite = row["specificite"] || row["specificité"] || "";
-      const karazany = row["karazany"] || "";
-
-      if (!reference || !specificite || !karazany) {
+      if (!reference) {
         skipped += 1;
         continue;
       }

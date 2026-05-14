@@ -23,6 +23,9 @@ function ImagesProductImport({ onCreate }) {
         const file = zip.files[fileName];
 
         if (file.dir) continue;
+        const baseName = fileName.split("/").pop() || "";
+        if (fileName.startsWith("__MACOSX/")) continue;
+        if (baseName.startsWith("._")) continue;
 
         const imageBlob = await file.async("blob");
 

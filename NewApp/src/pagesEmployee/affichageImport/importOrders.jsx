@@ -60,10 +60,12 @@ function ImportOrders({ onCreate }) {
         await onCreate(row);
         imported += 1;
       } catch (err) {
+        const status = err?.response?.status ? `HTTP ${err.response.status}` : "";
+        const url = err?.config?.url ? ` ${err.config.url}` : "";
         const apiError = err?.response?.data
           ? String(err.response.data).slice(0, 180)
           : (err?.message || "erreur inconnue");
-        errors.push(`${email || nom || "ligne"}: ${apiError}`);
+        errors.push(`${email || nom || "ligne"}: ${status}${url} ${apiError}`.trim());
       }
     }
 

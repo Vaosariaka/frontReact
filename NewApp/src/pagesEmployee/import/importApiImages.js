@@ -72,17 +72,44 @@ export const uploadProductImageFile = async (imageId, file) => {
     );
   };
 
-const parseProductIdFromName = (fileName) => {
+const parseReferenceFromName = (fileName) => {
   const base = String(fileName || "").split("/").pop() || "";
   const noExt = base.replace(/\.[^.]+$/, "");
-  const match = noExt.match(/(\d+)$/);
-  return match ? Number(match[1]) : null;
+  // Ex: T_01.png, P_01-1.jpg, M_02_cover.jpeg -> T_01 / P_01 / M_02
+  const match = noExt.match(/^([A-Za-z0-9]+_[0-9]+)(?:[_-].*)?$/);
+  return match ? match[1] : null;
+};
+
+const fetchProductIdByReference = async (reference) => {
+  const res = await axios.get(
+    `/api/api/products?display=full&filter[reference]=${encodeURIComponent(reference)}`,
+    {
+      headers: {
+        Authorization: `Basic ${btoa(apiKey + ":")}`,
+        Accept: "application/xml",
+      },
+      responseType: "text",
+    }
+  );
+
+  const payload = parser.parse(res.data);
+  const product = payload?.prestashop?.products?.product;
+  if (!product) return null;
+  const first = Array.isArray(product) ? product[0] : product;
+  return first?.id || null;
 };
 
 export const importImageFromZipEntry = async ({ name, file }) => {
-  const productId = parseProductIdFromName(name);
+  const reference = parseReferenceFromName(name);
+  if (!reference) {
+    throw new Error(
+      `Nom image invalide (${name}). Format attendu: REFERENCE.ext (ex: T_01.png).`
+    );
+  }
+
+  const productId = await fetchProductIdByReference(reference);
   if (!productId) {
-    throw new Error(`Impossible de determiner l'id produit depuis le nom: ${name}`);
+    throw new Error(`Produit introuvable pour la reference image: ${reference}`);
   }
 
   const formData = new FormData();

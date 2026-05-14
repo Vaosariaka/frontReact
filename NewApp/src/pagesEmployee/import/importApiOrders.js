@@ -20,6 +20,11 @@ const toNumber = (value) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
+const formatAmount = (value) => {
+  const num = Number(value || 0);
+  return Number.isFinite(num) ? num.toFixed(6) : "0.000000";
+};
+
 const buildAuthHeaders = (contentType = "application/xml") => ({
   Authorization: `Basic ${btoa(apiKey + ":")}`,
   "Content-Type": contentType,
@@ -286,14 +291,21 @@ const createOrder = async ({
         conversion_rate: "1",
         id_shop: String(shopId),
         id_shop_group: String(shopGroupId),
-        total_paid: String(totals.totalPaid),
-        total_paid_tax_incl: String(totals.totalPaidTaxIncl),
-        total_paid_tax_excl: String(totals.totalPaidTaxExcl),
-        total_products: String(totals.totalProducts),
-        total_products_wt: String(totals.totalProductsWt),
-        total_shipping: String(totals.totalShipping),
-        total_shipping_tax_incl: String(totals.totalShipping),
-        total_shipping_tax_excl: String(totals.totalShipping),
+        total_paid: formatAmount(totals.totalPaid),
+        total_paid_tax_incl: formatAmount(totals.totalPaidTaxIncl),
+        total_paid_tax_excl: formatAmount(totals.totalPaidTaxExcl),
+        total_paid_real: formatAmount(totals.totalPaid),
+        total_products: formatAmount(totals.totalProducts),
+        total_products_wt: formatAmount(totals.totalProductsWt),
+        total_shipping: formatAmount(totals.totalShipping),
+        total_shipping_tax_incl: formatAmount(totals.totalShipping),
+        total_shipping_tax_excl: formatAmount(totals.totalShipping),
+        total_discounts: "0.000000",
+        total_discounts_tax_incl: "0.000000",
+        total_discounts_tax_excl: "0.000000",
+        total_wrapping: "0.000000",
+        total_wrapping_tax_incl: "0.000000",
+        total_wrapping_tax_excl: "0.000000",
         valid: "1",
         date_add: dateAdd || undefined,
         associations: {
@@ -363,7 +375,8 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
   for (const purchase of purchases) {
     const product = await fetchProductByReference(purchase.reference);
     if (!product?.id) {
-      throw new Error(`Produit introuvable pour la reference: ${purchase.reference}`);
+      // On ignore les references inexistantes au lieu de faire echouer toute la commande.
+      continue;
     }
 
     const price = toNumber(product.price) ?? 0;
@@ -392,6 +405,9 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
 
   const totalShipping = 0;
   const totalPaid = totals.totalProductsWt + totalShipping;
+  if (!items.length) {
+    throw new Error("Aucun produit valide pour cette commande.");
+  }
 
   const cartId = await createCart({
     customerId,
