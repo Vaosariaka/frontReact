@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import Papa from "papaparse";
 import { XMLParser } from "fast-xml-parser";
 
 const apiKey = import.meta.env.VITE_PS_API_KEY;
@@ -12,20 +11,6 @@ const parser = new XMLParser({
 const authHeaders = {
   Authorization: `Basic ${btoa(apiKey + ":")}`,
   Accept: "application/xml",
-};
-
-const readCsv = async (path) => {
-  const res = await fetch(path);
-  const text = await res.text();
-  return new Promise((resolve) => {
-    Papa.parse(text, {
-      header: true,
-      skipEmptyLines: true,
-      delimiter: ",",
-      transformHeader: (h) => String(h || "").replace(/^\uFEFF/, "").trim(),
-      complete: (results) => resolve(results.data || []),
-    });
-  });
 };
 
 const toArray = (value) => (Array.isArray(value) ? value : value ? [value] : []);
@@ -47,20 +32,25 @@ const safeDeleteById = async (resource, id) => {
     return true;
   } catch (error) {
     const status = error?.response?.status;
-    // Certains endpoints PrestaShop (ex: stock_availables) refusent DELETE.
     if (status === 404 || status === 405) {
       return false;
     }
-    throw error;
+    console.error(`Error deleting ${resource} ${id}:`, error);
+    return false;
   }
 };
 
-const fetchByFilter = async (resource, collectionKey, itemKey, filterQuery) => {
-  const res = await axios.get(`/api/api/${resource}?display=full&${filterQuery}`, {
-    headers: authHeaders,
-    responseType: "text",
-  });
-  return parseCollection(res.data, collectionKey, itemKey);
+const fetchAll = async (resource, collectionKey, itemKey) => {
+  try {
+    const res = await axios.get(`/api/api/${resource}?display=full`, {
+      headers: authHeaders,
+      responseType: "text",
+    });
+    return parseCollection(res.data, collectionKey, itemKey);
+  } catch(e) {
+    console.warn("Error fetching " + resource, e);
+    return [];
+  }
 };
 
 export default function ResetData() {
@@ -68,117 +58,67 @@ export default function ResetData() {
   const [message, setMessage] = useState(null);
 
   const onReset = async () => {
-    if (!confirm("Confirmer la reinitialisation des donnees importees ?")) return;
+    if (!confirm("Confirmer la reinitialisation de TOUTES les données ?")) return;
     setLoading(true);
-    setMessage(null);
+    setMessage("Suppression en cours...");
     try {
-      const csv1 = await readCsv("/csv/import-data-mai-26 - fichier1.csv");
-      const csv3 = await readCsv("/csv/import-data-mai-26 - fichier3.csv");
-
-      const references = [...new Set(csv1.map((r) => String(r.reference || "").trim()).filter(Boolean))];
-      const emails = [...new Set(csv3.map((r) => String(r.email || "").trim()).filter(Boolean))];
-
       let deletedProducts = 0;
       let deletedOrders = 0;
       let deletedCustomers = 0;
       let deletedCarts = 0;
       let deletedAddresses = 0;
       let deletedCombinations = 0;
-      let deletedStocks = 0;
 
-      // 1) Reset Produits importes (+ combinaisons + stocks lies)
-      for (const reference of references) {
-        const products = await fetchByFilter(
-          "products",
-          "products",
-          "product",
-          `filter[reference]=${encodeURIComponent(reference)}`
-        );
-
-        for (const product of products) {
-          const productId = product?.id;
-          if (!productId) continue;
-
-          const combinations = await fetchByFilter(
-            "combinations",
-            "combinations",
-            "combination",
-            `filter[id_product]=${encodeURIComponent(productId)}`
-          );
-          for (const c of combinations) {
-            if (c?.id) {
-              const deleted = await safeDeleteById("combinations", c.id);
-              if (deleted) deletedCombinations += 1;
-            }
-          }
-
-          // IMPORTANT: stock_availables peut retourner 405 en DELETE selon la config PS.
-          // On laisse la suppression du produit/nettoyage global gérer ces lignes.
-
-          const deletedProduct = await safeDeleteById("products", productId);
-          if (deletedProduct) deletedProducts += 1;
+      // DELETE ORDERS
+      const orders = await fetchAll("orders", "orders", "order");
+      for (const o of orders) {
+        if (o?.id) {
+          if (await safeDeleteById("orders", o.id)) deletedOrders++;
         }
       }
 
-      // 2) Reset Clients importes + donnees liees
-      for (const email of emails) {
-        const customers = await fetchByFilter(
-          "customers",
-          "customers",
-          "customer",
-          `filter[email]=${encodeURIComponent(email)}`
-        );
+      // DELETE CARTS
+      const carts = await fetchAll("carts", "carts", "cart");
+      for (const c of carts) {
+        if (c?.id) {
+          if (await safeDeleteById("carts", c.id)) deletedCarts++;
+        }
+      }
 
-        for (const customer of customers) {
-          const customerId = customer?.id;
-          if (!customerId) continue;
+      // DELETE COMBINATIONS
+      const combinations = await fetchAll("combinations", "combinations", "combination");
+      for (const c of combinations) {
+        if (c?.id) {
+          if (await safeDeleteById("combinations", c.id)) deletedCombinations++;
+        }
+      }
 
-          const orders = await fetchByFilter(
-            "orders",
-            "orders",
-            "order",
-            `filter[id_customer]=${encodeURIComponent(customerId)}`
-          );
-          for (const o of orders) {
-            if (o?.id) {
-              const deleted = await safeDeleteById("orders", o.id);
-              if (deleted) deletedOrders += 1;
-            }
-          }
+      // DELETE PRODUCTS
+      const products = await fetchAll("products", "products", "product");
+      for (const p of products) {
+        if (p?.id) {
+          if (await safeDeleteById("products", p.id)) deletedProducts++;
+        }
+      }
 
-          const carts = await fetchByFilter(
-            "carts",
-            "carts",
-            "cart",
-            `filter[id_customer]=${encodeURIComponent(customerId)}`
-          );
-          for (const c of carts) {
-            if (c?.id) {
-              const deleted = await safeDeleteById("carts", c.id);
-              if (deleted) deletedCarts += 1;
-            }
-          }
+      // DELETE ADDRESSES
+      const addresses = await fetchAll("addresses", "addresses", "address");
+      for (const a of addresses) {
+        if (a?.id) {
+          if (await safeDeleteById("addresses", a.id)) deletedAddresses++;
+        }
+      }
 
-          const addresses = await fetchByFilter(
-            "addresses",
-            "addresses",
-            "address",
-            `filter[id_customer]=${encodeURIComponent(customerId)}`
-          );
-          for (const a of addresses) {
-            if (a?.id) {
-              const deleted = await safeDeleteById("addresses", a.id);
-              if (deleted) deletedAddresses += 1;
-            }
-          }
-
-          const deletedCustomer = await safeDeleteById("customers", customerId);
-          if (deletedCustomer) deletedCustomers += 1;
+      // DELETE CUSTOMERS
+      const customers = await fetchAll("customers", "customers", "customer");
+      for (const c of customers) {
+        if (c?.id) {
+          if (await safeDeleteById("customers", c.id)) deletedCustomers++;
         }
       }
 
       setMessage(
-        `Reinit terminee: ${deletedProducts} produits, ${deletedCombinations} combinaisons, ${deletedStocks} stocks, ${deletedOrders} commandes, ${deletedCarts} paniers, ${deletedAddresses} adresses, ${deletedCustomers} clients supprimes.`
+        `Reinit terminee: ${deletedProducts} produits, ${deletedCombinations} combinaisons, ${deletedOrders} commandes, ${deletedCarts} paniers, ${deletedAddresses} adresses, ${deletedCustomers} clients supprimes.`
       );
     } catch (error) {
       console.error("Erreur reinitialisation:", error);
@@ -191,7 +131,7 @@ export default function ResetData() {
   return (
     <div>
       <button onClick={onReset} disabled={loading}>
-        {loading ? "En cours..." : "Reinitialiser"}
+        {loading ? "En cours..." : "Reinitialiser TOUTES les données"}
       </button>
       {message && <p>{message}</p>}
     </div>

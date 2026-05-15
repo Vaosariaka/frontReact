@@ -16,6 +16,13 @@ export default function EmployeeDashboard() {
         const byDay = {};
 
         list.forEach((o) => {
+            // "etat vide==dans le panier et non commande"
+            if (!o.current_state) return;
+            
+            // "ne pas compter le nbre commande annuler" (id 6 = Annulé)
+            if (String(o.current_state) === "6") return;
+
+            // "date de commande maiss pas date de paiement"
             const dateStr = o.date_add ? String(o.date_add).split(" ")[0] : "Inconnu";
             const amount = Number(o.total_paid || 0);
 
@@ -44,11 +51,12 @@ export default function EmployeeDashboard() {
             <button onClick={logout} style={{ padding: "8px 15px", marginBottom: "20px" }}>
                 Se déconnecter
             </button>
-            <div style={{ display: "flex", gap: "14px", marginBottom: "20px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "14px", marginBottom: "20px", flexWrap: "wrap", borderBottom: "1px solid #ccc", paddingBottom: "15px" }}>
                 <a href="/employee/imports">Importer les 4 fichiers</a>
                 <a href="/employee/reset">Reinitialiser les donnees</a>
                 <a href="/employee/statut-commande">Commandes: changer etat</a>
                 <a href="/employee/sync-backoffice">Controle Sync BackOffice</a>
+                <a href="/employee/stock" style={{ fontWeight: "bold", color: "blue" }}>Gestion des stocks</a>
             </div>
 
             <div style={{ marginTop: "30px" }}>

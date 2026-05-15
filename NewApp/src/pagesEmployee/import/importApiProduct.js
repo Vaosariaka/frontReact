@@ -198,15 +198,11 @@ export const createProduct = async (row, defaults = {}) => {
     active: "1",
   };
 
-  if (categoryId) {
-    productPayload.associations = {
-      categories: {
-        category: {
-          id: String(categoryId),
-        },
-      },
-    };
-  }
+  productPayload.associations = {
+    categories: {
+      category: categoryId ? { "id": String(categoryId) } : undefined,
+    },
+  };
 
   const obj = {
     prestashop: {

@@ -1,0 +1,12 @@
+=== REVIEW DES CHANGEMENTS ===
+Réponse à votre question sur les produits dans PrestaShop :
+Dans l'admin de PrestaShop, il n'y a que 20 produits affichés (ceux de démonstration par défaut de la version 8.2.6) car les scripts d'import actuels ("importApiOrders.js") n'importent que des **commandes** rattachées à des références ou produits existants. Les produits originaux du CSV (ou d'un autre) ne sont pas injectés dans la table PrestaShop, ils ne font qu'être lu pour créer des commandes. S'il fallait créer de nouveaux produits, il faudrait un import explicite de l'entité Produit dans PrestaShop, or jusqu'ici seul l'import des utilisateurs, paniers et commandes a été réalisé.
+
+-- Implémentation en cours (Jour 3) --
+- Vérification format CSV (Nom colonnes, format de date DD/MM/YYYY, montant positif) à l'importation.
+- Création de la page d'ajout de stock au backoffice.
+- Ajout de l'historique sur l'évolution du stock.
+- Affichage de la quantité restante en front-office.
+
+
+-prq lors import,le categorie n'est pas liee avec le produit ,c prq je ne vois pas le produit dans le admin de prestashop

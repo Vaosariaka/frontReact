@@ -50,10 +50,29 @@ function ProductImport({ onCreate }) {
     let skipped = 0;
     const errors = [];
 
+    // Validation des colonnes
+    const expectedCols = ["nom", "reference", "prix_ttc"];
+    const fileCols = Object.keys(rows[0] || {}).map(c => c.trim());
+    const missingCols = expectedCols.filter(c => !fileCols.includes(c));
+    if (missingCols.length > 0) {
+      setMessage(`Erreur: Colonnes manquantes ou non conformes: ${missingCols.join(", ")}`);
+      setLoading(false);
+      return;
+    }
+
     for (const row of rows) {
       const nom = row["nom"] || "";
       const reference = row["reference"] || "";
       const prixTtc = row["prix_ttc"] || "";
+
+      // Validation: Montant positif
+      if (prixTtc) {
+        const montant = parseFloat(String(prixTtc).replace(",", "."));
+        if (isNaN(montant) || montant <= 0) {
+            errors.push(`${reference}: montant non positif invalide (${prixTtc})`);
+            continue;
+        }
+      }
 
       if (!nom || !reference || !prixTtc) {
         skipped += 1;

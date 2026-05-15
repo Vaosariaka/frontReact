@@ -46,10 +46,28 @@ function ImportOrders({ onCreate }) {
     let skipped = 0;
     const errors = [];
 
+    // Validation des colonnes
+    const expectedCols = ["date", "nom", "email", "pwd", "adresse", "achat", "etat"];
+    const fileCols = Object.keys(rows[0] || {}).map(c => c.trim());
+    const missingCols = expectedCols.filter(c => !fileCols.includes(c));
+    if (missingCols.length > 0) {
+      setMessage(`Erreur: Colonnes manquantes ou non conformes: ${missingCols.join(", ")}`);
+      setLoading(false);
+      return;
+    }
+
     for (const row of rows) {
       const nom = row["nom"] || "";
       const email = row["email"] || "";
       const pwd = row["pwd"] || "";
+      const date = row["date"] || "";
+
+      // Format date check (doit etre strictement DD/MM/YYYY si fourni)
+      if (date && !/^\d{2}\/\d{2}\/\d{4}$/.test(date)) {
+         errors.push(`${email || nom}: format de date invalide (attendu DD/MM/YYYY), recu: ${date}`);
+         continue;
+      }
+
 
       if (!nom || !email || !pwd) {
         skipped += 1;
@@ -63,7 +81,7 @@ function ImportOrders({ onCreate }) {
         const status = err?.response?.status ? `HTTP ${err.response.status}` : "";
         const url = err?.config?.url ? ` ${err.config.url}` : "";
         const apiError = err?.response?.data
-          ? String(err.response.data).slice(0, 180)
+          ? String(err.response.data).slice(0, 1000)
           : (err?.message || "erreur inconnue");
         errors.push(`${email || nom || "ligne"}: ${status}${url} ${apiError}`.trim());
       }

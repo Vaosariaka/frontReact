@@ -38,6 +38,21 @@ const parseFirstId = (data, collectionKey, itemKey) => {
   return collection?.id || null;
 };
 
+
+const extractValue = (field) => {
+  if (!field) return "";
+  if (typeof field === "string") return field.trim();
+  if (typeof field === "number") return field.toString();
+  if (typeof field === "object") {
+    if (field["#text"] !== undefined) return String(field["#text"]).trim();
+    if (field.language) {
+      const lang = Array.isArray(field.language) ? field.language[0] : field.language;
+      if (lang && lang["#text"] !== undefined) return String(lang["#text"]).trim();
+    }
+  }
+  return "";
+};
+
 const splitName = (nom) => {
   const value = String(nom || "").trim();
   if (!value) return { firstname: "", lastname: "" };
@@ -330,14 +345,22 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
   const { date, nom, email, pwd, adresse, achat, etat } = row;
   const { firstname, lastname } = splitName(nom);
 
+  let formattedDate = date || undefined;
+  if (formattedDate && formattedDate.includes("/")) {
+    const parts = formattedDate.split("/");
+    if (parts.length === 3) {
+      formattedDate = `${parts[2]}-${parts[1]}-${parts[0]} 00:00:00`;
+    }
+  }
+
   const langId = defaults.langId || 1;
   const currencyId = defaults.currencyId || 1;
   const carrierId = defaults.carrierId || 1;
   const shopId = defaults.shopId || 1;
   const shopGroupId = defaults.shopGroupId || 1;
   const countryId = defaults.countryId || 1;
-  const addressCity = defaults.city || "Antananarivo";
-  const addressPostcode = defaults.postcode || "101";
+  const addressCity = defaults.city || "Paris";
+  const addressPostcode = defaults.postcode || "75001";
   const addressAlias = defaults.addressAlias || "Adresse";
   const payment = defaults.payment || "Import CSV";
   const module = defaults.module || "bankwire";
@@ -387,7 +410,7 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
       productId: product.id,
       productAttributeId: 0,
       quantity: purchase.quantity || 1,
-      productName: product.name?.language?.["#text"] || "",
+      productName: extractValue(product.name) || "Produit",
       productReference: product.reference || purchase.reference,
       productPrice: price,
     });
@@ -448,6 +471,6 @@ export const createOrderFromCsvRow = async (row, defaults = {}) => {
       totalShipping,
     },
     items,
-    dateAdd: date || undefined,
+    dateAdd: formattedDate,
   });
 };
