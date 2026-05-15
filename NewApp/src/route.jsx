@@ -12,7 +12,6 @@ import CategoriesPage from "./pagesClient/CategoriesPage";
 import PanierPage from "./pagesClient/PanierPage";
 import DetailProductPage from "./pagesClient/detailProductPage";
 import MesCommandesPage from "./pagesClient/MesCommandesPage";
-// import ClientDashboard from "./pagesClient/CustomerDashboard.css";
 import StatutCommande from "./statut/StatutCommande";
 
 export default function AppRoutes() {
@@ -53,7 +52,6 @@ export default function AppRoutes() {
     "/employee/statut-commande": <StatutCommande />,
     "/employee/sync-backoffice": <BackofficeSyncPage />,
   };
-  
 
   const detailMatch = pathname.match(/^\/product\/([^/]+)$/);
   const detailProductId = detailMatch ? detailMatch[1] : null;
@@ -106,6 +104,9 @@ export default function AppRoutes() {
       : (employeeRoutes[pathname] ?? employeeRoutes["/"]),
     customer: customerIsTryingBackoffice
       ? <div style={{ padding: 20 }}>Acces BackOffice refuse pour un compte client.</div>
+      : customerView,
+    anonymous: customerIsTryingBackoffice
+      ? <div style={{ padding: 20 }}>Acces BackOffice refuse pour un compte anonyme.</div>
       : customerView,
   };
   const authenticatedView =

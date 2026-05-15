@@ -2,11 +2,11 @@ import { useMemo, useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import {
   clearCart,
-  createOrderCOD,
   getCartItems,
   removeCartItem,
   updateCartItemQty,
 } from "../api/frontOfficeStore";
+import { submitOrderToPrestashop } from "../api/checkoutApi";
 
 export default function PanierPage() {
   const { user } = useAuth();
@@ -20,11 +20,24 @@ export default function PanierPage() {
   const shippingCost = 0;
   const total = totalProducts + shippingCost;
 
-  const onValidateOrder = () => {
+  const onValidateOrder = async () => {
     if (!items.length) return;
-    const order = createOrderCOD(user, items);
-    setItems(getCartItems(user.id));
-    setMessage(`Commande ${order.id} validee`);
+    
+    if (user.method === "anonymous") {
+      setMessage("Veuillez vous connecter avec un compte client pour valider votre commande.");
+      return;
+    }
+    
+    setMessage("Validation de la commande en cours...");
+    try {
+      const order = await submitOrderToPrestashop(user, items);
+      clearCart(user.id);
+      setItems(getCartItems(user.id));
+      setMessage(`Commande #${order.id} validee avec succes !`);
+    } catch (error) {
+      console.error(error);
+      setMessage("Erreur lors de la validation de la commande.");
+    }
   };
 
   return (

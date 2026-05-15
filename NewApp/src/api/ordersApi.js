@@ -72,3 +72,29 @@ export async function fetchOrderStateIdByKeywords(keywords = []) {
 
   return found?.id || null;
 }
+
+export async function fetchOrderStates() {
+  const res = await axios.get("/api/api/order_states?display=full", {
+    headers: {
+      Authorization: `Basic ${btoa(apiKey + ":")}`,
+      Accept: "application/xml",
+    },
+    responseType: "text",
+  });
+  const data = parser.parse(res.data);
+  const states = data?.prestashop?.order_states?.order_state || [];
+  return Array.isArray(states) ? states : [states];
+}
+
+export async function fetchOrdersByCustomer(customerId) {
+  const res = await axios.get(`/api/api/orders?display=full&filter[id_customer]=${customerId}`, {
+    headers: {
+      Authorization: `Basic ${btoa(apiKey + ":")}`,
+      Accept: "application/xml",
+    },
+    responseType: "text",
+  });
+  const data = parser.parse(res.data);
+  const orders = data?.prestashop?.orders?.order || [];
+  return Array.isArray(orders) ? orders : [orders];
+}

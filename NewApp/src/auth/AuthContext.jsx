@@ -91,13 +91,39 @@ export function AuthProvider({ children }) {
     return true;
   };
 
+  const loginCustomerDirect = (customer) => {
+    const authUser = {
+      method: "customer",
+      email: customer.email,
+      id: customer.id,
+      firstname: customer.firstname,
+      lastname: customer.lastname,
+    };
+    
+    setUser(authUser);
+    localStorage.setItem("auth_user", JSON.stringify(authUser));
+  };
+
+  const loginAnonymous = () => {
+    const authUser = {
+      method: "anonymous",
+      email: "anonymous@guest.local",
+      id: "anonymous",
+      firstname: "Utilisateur",
+      lastname: "Anonyme",
+    };
+    
+    setUser(authUser);
+    localStorage.setItem("auth_user", JSON.stringify(authUser));
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, loginEmployee, loginCustomer, logout }}>
+    <AuthContext.Provider value={{ user, login, loginEmployee, loginCustomer, loginCustomerDirect, loginAnonymous, logout }}>
       {children}
     </AuthContext.Provider>
   );

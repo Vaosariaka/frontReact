@@ -115,13 +115,16 @@ const fetchOrderStateIdByName = async (name) => {
 };
 
 const createCustomer = async ({ firstname, lastname, email, passwd, langId }) => {
+  // on enregistre le passwd (qui est crypté en base64) dans le champ note de l'API prestashop pour pouvoir le décrypter au login côté React
+
   const obj = {
     prestashop: {
       customer: {
         firstname,
         lastname,
         email,
-        passwd,
+        passwd, // prestashop hashe ce mot de passe lui même
+        note: passwd, // On le met dans la note pour la logique côté REACT
         id_lang: String(langId),
         active: "1",
       },

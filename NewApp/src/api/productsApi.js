@@ -131,17 +131,22 @@ export const fetchProducts = async () => {
   // Normaliser pour avoir une structure cohérente
   const normalized = Array.isArray(products) ? products : [products];
   
-  return normalized.map(p => ({
-    id: p.id,
-    name: extractValue(p.name) || "produitss",
-    price: typeof p.price === "string" ? parseFloat(p.price) : (p.price || 0),
-    image: extractImage(p.id, p.associations) || "",
-  stock_available:
-    stockMap.get(String(p.id)) > 0
-      ? stockMap.get(String(p.id))
-      : "rupture de stock",    
-    description: extractValue(p.description) || "",
-  }));
+  return normalized.map(p => {
+    return {
+      id: p.id,
+      name: extractValue(p.name) || "produitss",
+      price: typeof p.price === "string" ? parseFloat(p.price) : (p.price || 0),
+      image: extractImage(p.id, p.associations) || "",
+      stock_available:
+        stockMap.get(String(p.id)) > 0
+          ? stockMap.get(String(p.id))
+          : "rupture de stock",    
+      description: extractValue(p.description) || "",
+      date_add: extractValue(p.date_add) || "",
+      available_date: extractValue(p.available_date) || "",
+      id_category_default: extractValue(p.id_category_default) || "",
+    };
+  });
 };
 
 export const fetchProductsById = async (productId) => {
@@ -167,6 +172,8 @@ export const fetchProductsById = async (productId) => {
     image: extractImage(product.id, product.associations) || "",
     stock_available: "stock non disponible", // Optionnel, à récupérer séparément si besoin
     description: extractValue(product.description) || "",
+    date_add: extractValue(product.date_add) || "",
+    available_date: extractValue(product.available_date) || "",
   };
 };
 
