@@ -196,11 +196,16 @@ export const createProduct = async (row, defaults = {}) => {
     available_for_order: "1",
     show_price: "1",
     active: "1",
+    state: "1",
+    id_shop_default: "1",
   };
 
   productPayload.associations = {
     categories: {
-      category: categoryId ? { "id": String(categoryId) } : undefined,
+      category: [
+        { id: "2" },
+        categoryId && String(categoryId) !== "2" ? { id: String(categoryId) } : null
+      ].filter(Boolean),
     },
   };
 
