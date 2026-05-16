@@ -1,0 +1,43 @@
+
+## Jour 1
+### NewAPP
+1. Backoffice
+- [x] a. protéger les pages du back office (ProtectedRoute rôle employee)
+- [x] b. réinitialiser les données (resetService.js : gère produits, catégories, taxes, attributs, commandes)
+- [x] c. importer les 4 fichiers (RESET AUTOMATIQUE intégré dans l'import global)
+  - [x] i. 3 fichiers csv (Produits, Déclinaisons, Clients/Commandes avec fix order_history)
+  - [x] ii. 1 fichier zip pour les images
+- [x] d. afficher les commandes et modifier l'état (OrdersPage, mapping 13, 2, 8, 6)
+
+2. FrontOffice
+- [x] a. page d'accueil et fiche produit (HomePage, ProductDetailPage)
+- [x] b. workflow d'achat (panier → Checkout → Paiement à la livraison)
+- [x] c. état de "mes commandes" (MyOrdersPage client)
+
+## Jour 2
+### NewAPP
+1. Backoffice
+- [x] a. Utilisation des états des commandes (dynamique via API + fix import status 8)
+- [x] b. Tableau de bord (KPI valides uniquement, Paniers moyens, Stats/jour)
+- [x] c. Import des déclinaisons (Pipeline combinations, product_option_values)
+
+2. Frontoffice
+- [ ] a. Changer la page d'accueil : liste des utilisateurs + option "utilisateur anonyme"
+- [ ] b. Marques produits HOT / NEW (date_availability_produit)
+- [ ] c. Recherche multicritère (nom, catégorie, prix)
+
+## Jour 3
+### NewAPP
+3. Backoffice
+- [x] a. Vérifier les erreurs dans l'import :
+  - [x] i. Colonnes non conformes 
+  - [x] ii. Format de date DD/MM/YYYY
+  - [x] iii. Montant positif (prix > 0 bloquant dans importService)
+- [x] b. Page pour ajouter en stock les produits (StockManagementPage accessible)
+- [x] c. Tableau évolution stock journalier (StockHistory + StockEvolutionDay via stockhistory.php)
+
+4. FrontOffice
+- [x] a. Afficher la quantité en stock disponible sur la fiche produit
+
+---
+Légende : [x] fait | [ ] à faire | [~] partiel

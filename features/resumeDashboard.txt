@@ -1,0 +1,283 @@
+================================================================================
+  RÉSUMÉ — TABLEAU DE BORD BACK-OFFICE (Dashboard)
+  Projet : React + API Webservice PrestaShop
+================================================================================
+
+1. OBJECTIF
+-----------
+Afficher les statistiques de ventes pour l'employé connecté au back-office :
+  - Total HT et Total TTC (chiffre d'affaires)
+  - Nombre de commandes validées
+  - Panier moyen HT / TTC
+  - Évolution journalière : par jour → nb commandes + montants HT et TTC
+
+Conforme au cahier d'évaluation (frontReact/evaluation.md) :
+  - Par jour : nombre de commandes + montant
+  - Total général (ici en HT et TTC)
+
+Important : on ne compte PAS les paniers (ps_cart), ni les commandes annulées
+ou en attente de paiement. Seules les ventes réelles validées.
+
+
+2. FICHIERS IMPLIQUÉS
+---------------------
+  Route (accès page)
+    src/router.jsx
+      → URL : /back/dashboard
+      → Protégée par rôle "employee" (ProtectedRoute)
+
+  Interface utilisateur
+    src/pages/backoffice/DashboardPage.jsx
+      → Composant React principal, affichage cartes + tableau
+
+  Logique métier (filtres + calculs)
+    src/utils/orderFilters.js
+      → parseOrderField, isValidSaleOrder, computeDashboardStats
+
+  Services API
+    src/services/orderService.js
+      → getAllForDashboard() : récupère jusqu'à 1000 commandes
+    src/services/orderStateService.js
+      → getAllAsMap() : récupère les états de commande avec flags logable/paid
+
+  Couche HTTP / XML
+    src/api.js
+      → getResource() : GET vers Webservice PrestaShop, parse XML → objet JS
+    src/utils/xmlParser.js
+      → parseXML avec fast-xml-parser (#text pour les valeurs CDATA)
+
+  Utilitaires
+    src/utils/utils.js
+      → extractSimpleId() pour lire id / current_state depuis le XML
+
+  Styles
+    src/assets/css/backoffice.css
+      → .bo-dashboard-stats, .bo-stat-card, .bo-orders-table, etc.
+
+
+3. FLUX GLOBAL (ÉTAPES)
+-----------------------
+
+  Étape 1 — Ouverture de la page
+    L'utilisateur va sur /back/dashboard (menu Sidebar → Statistiques).
+
+  Étape 2 — Chargement parallèle (useEffect au montage)
+    Promise.all([
+      orderService.getAllForDashboard(),   // commandes
+      orderStateService.getAllAsMap(),     // états
+    ])
+
+  Étape 3 — Appels API (détail ci-dessous)
+    GET /api/orders?display=full&limit=1000&output_format=XML
+    GET /api/order_states?display=full&output_format=XML
+
+  Étape 4 — Filtrage des commandes valides (useMemo)
+    validOrders = allOrders.filter(order => isValidSaleOrder(order, statesMap))
+
+  Étape 5 — Calcul des statistiques (useMemo)
+    stats = computeDashboardStats(validOrders)
+
+  Étape 6 — Affichage
+    Cartes (totaux, panier moyen) + tableau par jour + lien vers /back/orders
+
+
+4. APPEL API — COMMENT ÇA MARCHE
+---------------------------------
+
+  Configuration (.env)
+    VITE_PS_KEY = clé API PrestaShop (Basic Auth)
+
+  Client axios (api.js)
+    baseURL: "/api"
+    Authorization: Basic base64(API_KEY + ":")
+
+  Proxy Vite (vite.config.js)
+    /api/*  →  http://localhost/prestashop/api/*
+    Exemple : GET /api/orders  →  prestashop/api/orders (Webservice)
+
+  orderService.getAllForDashboard()
+    getResource("orders?display=full&limit=1000")
+    → parseXML(response)
+    → extrait prestashop.orders.order (tableau ou objet unique)
+    → retourne un tableau JavaScript de commandes
+
+  orderStateService.getAllAsMap()
+    getResource("order_states", { display: "full" })
+    → construit un objet :
+      {
+        "2": { name: "Paiement accepté", color: "#...", logable: 1, paid: 1, deleted: 0 },
+        "6": { name: "Annulé",           color: "#...", logable: 0, paid: 0, deleted: 0 },
+        ...
+      }
+
+
+5. LIAISON AVEC LA BASE DE DONNÉES (SCHÉMA)
+---------------------------------------------
+
+  Table principale : ps_orders
+  ┌─────────────────────┬──────────────────────────────────────────────┐
+  │ Champ API / BDD     │ Usage dans le dashboard                      │
+  ├─────────────────────┼──────────────────────────────────────────────┤
+  │ valid               │ Doit être = 1 (commande validée)             │
+  │ current_state       │ Lié à ps_order_state.id_order_state          │
+  │ date_add            │ Regroupement par jour (YYYY-MM-DD)           │
+  │ total_paid_tax_excl │ Montant HT                                   │
+  │ total_paid_tax_incl │ Montant TTC (repli : total_paid si absent)   │
+  │ total_paid          │ Secours si tax_incl manquant                 │
+  └─────────────────────┴──────────────────────────────────────────────┘
+
+  Table des états : ps_order_state
+  ┌─────────┬────────────────────────────────────────────────────────────┐
+  │ logable │ 1 = comptabilisé dans les stats de vente PrestaShop       │
+  │ paid    │ 1 = paiement reçu (informatif, non utilisé seul au filtre)│
+  │ deleted │ 1 = état supprimé → exclu                                 │
+  └─────────┴────────────────────────────────────────────────────────────┘
+
+  Exemples d'états (instance locale) :
+    ID 1  — En attente paiement     → logable=0 → EXCLU
+    ID 2  — Paiement accepté        → logable=1 → INCLUS
+    ID 6  — Annulé                  → logable=0 → EXCLU
+    ID 7  — Remboursé               → logable=0 → EXCLU
+
+  NON utilisé pour le dashboard :
+    ps_cart / ps_cart_product     → paniers (pas des commandes)
+    ps_order_detail               → lignes produits (détail ; le CA global
+                                    vient déjà de total_paid_* sur ps_orders)
+
+  Schéma relationnel simplifié :
+    ps_orders.id_customer      → ps_customer
+    ps_orders.current_state    → ps_order_state
+    ps_order_detail.id_order   → ps_orders  (non agrégé ici)
+
+
+6. LOGIQUE DE FILTRAGE — isValidSaleOrder()
+--------------------------------------------
+Fichier : src/utils/orderFilters.js
+
+  Une commande est comptée SI ET SEULEMENT SI :
+
+    1) order.valid === 1
+       (champ ps_orders.valid, lu via parseOrderField)
+
+    2) L'état current_state existe dans statesMap
+
+    3) statesMap[stateId].logable === 1
+       → exclut annulé, attente paiement, erreur, etc.
+
+    4) statesMap[stateId].deleted !== 1
+
+  Commandes exclues du CA (exemples) :
+    - Annulées, remboursées, en attente de paiement
+    - valid = 0
+    - Paniers : jamais dans la ressource "orders"
+
+  DashboardPage affiche aussi :
+    excludedCount = allOrders.length - validOrders.length
+    → message si des commandes existent mais ne sont pas comptées.
+
+
+7. LOGIQUE DE CALCUL — computeDashboardStats()
+-----------------------------------------------
+Fichier : src/utils/orderFilters.js
+
+  Entrée : tableau validOrders (déjà filtré)
+
+  Pour chaque commande :
+    date     = date_add (partie avant l'espace → jour)
+    amountTtc = total_paid_tax_incl OU total_paid
+    amountHt  = total_paid_tax_excl OU amountTtc (repli)
+
+    Si pas de date_add → commande ignorée pour le tableau journalier
+    (mais elle reste dans orderCount et les totaux globaux car la boucle
+     compte orderCount = validOrders.length avant exclusion par date — 
+     en pratique date_add est toujours présent sur une vraie commande)
+
+  Agrégation par jour (objet byDay) :
+    byDay["2026-05-16"] = { count, amountHt, amountTtc }
+
+  Tri : dates décroissantes (plus récent en premier)
+
+  Sorties :
+    totalHt, totalTtc           → sommes globales formatées "123.45"
+    orderCount                  → nombre de commandes validées
+    averageBasketHt / Ttc       → total / orderCount
+    sortedStats[]               → { day, count, amountHt, amountTtc }
+
+
+8. PARSING XML — parseOrderField()
+-----------------------------------
+  L'API renvoie du XML converti en JSON par fast-xml-parser.
+
+  Une valeur peut être :
+    - une string directe : "125.500000"
+    - un nombre
+    - un objet CDATA : { "#text": "125.500000" }
+
+  parseOrderField() normalise tout en valeur simple.
+  parseAmount() → parseFloat pour les calculs.
+  formatAmount() → toFixed(2) pour l'affichage.
+
+
+9. INTERFACE — DashboardPage.jsx
+---------------------------------
+
+  États React :
+    allOrders   → toutes les commandes API
+    statesMap   → états indexés par id
+    loading     → true pendant le fetch
+    error       → message si échec API
+
+  useMemo (performance) :
+    validOrders → recalcul si allOrders ou statesMap change
+    stats       → recalcul si validOrders change
+
+  Affichage conditionnel :
+    loading → <LoadingState />
+    error   → <ErrorState />
+    sinon   → cartes + tableau
+
+  Cartes (.bo-stat-card) :
+    Total HT
+    Total TTC
+    Commandes validées
+    Panier moyen HT / TTC
+
+  Tableau :
+    Colonnes : Date | Nb commandes | Montant HT | Montant TTC
+
+  Lien footer : /back/orders (toutes les commandes, y compris annulées)
+
+
+10. DIFFÉRENCE AVEC LA PAGE COMMANDES
+--------------------------------------
+  Dashboard (/back/dashboard)
+    → Filtre ventes validées uniquement
+    → Stats agrégées HT/TTC
+
+  Commandes (/back/orders)
+    → Liste TOUTES les commandes (pas de filtre logable)
+    → Permet de changer l'état (updateStatus)
+
+
+11. LIMITES CONNUES
+-------------------
+  - Limite API : 1000 commandes max (getAllForDashboard). Au-delà, stats
+    incomplètes → augmenter limit ou paginer si besoin.
+  - Pas de filtre par boutique / période dans l'UI (toutes les commandes).
+  - Le détail produit (ps_order_detail) n'est pas affiché sur ce dashboard.
+
+
+12. ARBORESCENCE APPEL DE FONCTIONS
+------------------------------------
+
+  DashboardPage (mount)
+    └─ orderService.getAllForDashboard()
+         └─ getResource("orders?display=full&limit=1000")
+              └─ api.get + parseXML
+    └─ orderStateService.getAllAsMap()
+         └─ getResource("order_states", { display: "full" })
+    └─ isValidSaleOrder(order, statesMap)  [pour chaque commande]
+    └─ computeDashboardStats(validOrders)
+    └─ rendu JSX (cartes + table)
+
+
