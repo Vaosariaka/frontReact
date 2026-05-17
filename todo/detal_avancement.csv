@@ -1,0 +1,24 @@
+Jour;Section;Bloc;Page;Description tâche;Statut;Avancement
+1;Backoffice;Gestion Login;Index;Protéger les pages du backoffice;Fait;100%
+1;Backoffice;Gestion Login;Index;Réinitialiser les données;Fait;100%
+1;Backoffice;Gestion Login;Index;Importer les 4 fichiers;Fait;100%
+1;Backoffice;Gestion Login;Index;Importer les 3 CSV + le ZIP images;Fait;100%
+1;Backoffice;Gestion Commandes;OrdersPage;Afficher les commandes et modifier l'état;Fait;100%
+1;FrontOffice;Accueil;HomePage;Créer la page d'accueil et la fiche produit;Fait;100%
+1;FrontOffice;Checkout;Checkout;Workflow d'achat panier → paiement à la livraison;Fait;100%
+1;FrontOffice;Mes commandes;MyOrdersPage;Afficher l'état de "mes commandes";Fait;100%
+2;Backoffice;Commandes;API;Utilisation des états des commandes via API;Fait;100%
+2;Backoffice;Commandes;Import;Fix import status 8;Fait;100%
+2;Backoffice;Tableau de bord;Dashboard;KPI valides uniquement;Fait;100%
+2;Backoffice;Tableau de bord;Dashboard;Paniers moyens et stats/jour;Fait;100%
+2;Backoffice;Catalogue;Déclinaisons;Pipeline combinations et product_option_values;Fait;100%
+2;FrontOffice;Accueil;HomePage;Changer la page d'accueil : liste des utilisateurs;À faire;0%
+2;FrontOffice;Accueil;HomePage;Ajouter l'option "utilisateur anonyme";À faire;0%
+2;FrontOffice;Catalogue;Recherche;Marques produits HOT / NEW;À faire;0%
+2;FrontOffice;Catalogue;Recherche;Recherche multicritère (nom, catégorie, prix);À faire;0%
+3;Backoffice;Import;Validation;Colonnes non conformes;Fait;100%
+3;Backoffice;Import;Validation;Format de date DD/MM/YYYY;Fait;100%
+3;Backoffice;Import;Validation;Montant positif ou prix > 0;Fait;100%
+3;Backoffice;Stock;StockManagementPage;Ajouter en stock les produits;Fait;100%
+3;Backoffice;Stocks;StockHistory;Évolution stock journalier;Fait;100%
+3;FrontOffice;Fiche produit;ProductDetailPage;Afficher la quantité en stock disponible;Fait;100%

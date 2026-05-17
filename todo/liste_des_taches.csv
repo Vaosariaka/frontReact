@@ -1,0 +1,24 @@
+Jour;Section;Bloc;Page;Description tâche;Type;Statut;Avancement
+1;Backoffice;Gestion Login;Index;Protéger les pages du backoffice (ProtectedRoute rôle employee);Affichage;Fait;100%
+1;Backoffice;Gestion Login;Index;Réinitialiser les données (resetService.js : produits, catégories, taxes, attributs, commandes);Métier;Fait;100%
+1;Backoffice;Gestion Login;Index;Importer les 4 fichiers (reset automatique intégré);Intégration;Fait;100%
+1;Backoffice;Gestion Login;Index;Importer les 3 CSV + le ZIP images;Intégration;Fait;100%
+1;Backoffice;Gestion Commandes;OrdersPage;Afficher les commandes et modifier l'état;Intégration;Fait;100%
+1;FrontOffice;Accueil;HomePage;Créer la page d'accueil et la fiche produit;Affichage;Fait;100%
+1;FrontOffice;Checkout;Checkout;Workflow d'achat panier → paiement à la livraison;Métier;Fait;100%
+1;FrontOffice;Mes commandes;MyOrdersPage;Afficher l'état de "mes commandes";Intégration;Fait;100%
+2;Backoffice;Commandes;API;Utilisation des états des commandes via API;Intégration;Fait;100%
+2;Backoffice;Commandes;Import;Fix import status 8;Métier;Fait;100%
+2;Backoffice;Tableau de bord;Dashboard;KPI valides uniquement;Métier;Fait;100%
+2;Backoffice;Tableau de bord;Dashboard;Paniers moyens et stats/jour;Intégration;Fait;100%
+2;Backoffice;Catalogue;Déclinaisons;Pipeline combinations et product_option_values;Intégration;Fait;100%
+2;FrontOffice;Accueil;HomePage;Changer la page d'accueil : liste des utilisateurs;Affichage;À faire;0%
+2;FrontOffice;Accueil;HomePage;Ajouter l'option "utilisateur anonyme";Affichage;À faire;0%
+2;FrontOffice;Catalogue;Recherche;Marques produits HOT / NEW (date_availability_produit);Intégration;À faire;0%
+2;FrontOffice;Catalogue;Recherche;Recherche multicritère (nom, catégorie, prix);Intégration;À faire;0%
+3;Backoffice;Import;Validation;Vérifier les erreurs : colonnes non conformes;Métier;Fait;100%
+3;Backoffice;Import;Validation;Vérifier les erreurs : format de date DD/MM/YYYY;Métier;Fait;100%
+3;Backoffice;Import;Validation;Bloquer les montants négatifs ou prix <= 0;Métier;Fait;100%
+3;Backoffice;Stock;StockManagementPage;Page pour ajouter en stock les produits;Affichage;Fait;100%
+3;Backoffice;Stocks;StockHistory;Tableau évolution stock journalier;Intégration;Fait;100%
+3;FrontOffice;Fiche produit;ProductDetailPage;Afficher la quantité en stock disponible;Affichage;Fait;100%
